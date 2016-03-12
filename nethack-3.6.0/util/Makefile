@@ -1,3 +1,50 @@
+#
+# This file is generated automatically.  Do not edit.
+# Your changes will be lost.  See sys/unix/NewInstall.unx.
+# Identify this file:
+MAKEFILE_UTL=1
+
+###
+### Start sys/unix/hints/cygwin PRE
+###
+# (new segment at source line 6 )
+# unix hints file
+# This hints file provides the legacy configuration that NetHack has shipped
+# with historically - this means you will most likely need to hand edit .h
+# and Makefiles.
+
+
+PREFIX=/usr
+HACKDIR=$(PREFIX)/games/lib/$(GAME)dir
+INSTDIR=$(HACKDIR)
+VARDIR=$(HACKDIR)
+SHELLDIR=$(PREFIX)/games
+
+CFLAGS=-O -I../include
+LINK=$(CC)
+
+WINSRC = $(WINTTYSRC)
+WINOBJ = $(WINTTYOBJ)
+WINLIB = $(WINTTYLIB)
+
+WINTTYLIB=-lncurses
+
+CHOWN=chown
+CHGRP=chgrp
+
+GAMEUID  = Lance
+GAMEGRP  = Users
+
+GAMEPERM = 04755
+VARFILEPERM = 0644
+VARDIRPERM = 0755
+
+POSTINSTALL=cp -n sys/unix/sysconf $(INSTDIR)/sysconf; $(CHOWN) $(GAMEUID) $(INSTDIR)/sysconf; $(CHGRP) $(GAMEGRP) $(INSTDIR)/sysconf; chmod $(VARFILEPERM) $(INSTDIR)/sysconf;
+### End sys/unix/hints/cygwin PRE
+
+###
+### Start Makefile.utl
+###
 #	Makefile for NetHack's utility programs.
 # NetHack 3.6  Makefile.utl	$NHDT-Date: 1449386560 2015/12/06 07:22:40 $  $NHDT-Branch: NetHack-3.6.0 $:$NHDT-Revision: 1.27 $
 
@@ -454,3 +501,9 @@ spotless: clean
 	-rm -f makedefs lev_comp dgn_comp recover dlb
 	-rm -f gif2txt txt2ppm tile2x11 tile2img.ttp xpm2img.ttp \
 		tilemap tileedit
+### End Makefile.utl
+
+###
+### Start sys/unix/hints/cygwin POST
+###
+### End sys/unix/hints/cygwin POST

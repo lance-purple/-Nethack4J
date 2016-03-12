@@ -848,10 +848,9 @@ cl_eos() /* free after Robert Viduya */
 #undef FALSE
 #define m_move curses_m_move /* Some curses.h decl m_move(), not used here \
                                 */
-
 #include <curses.h>
 
-#if !defined(LINUX) && !defined(__FreeBSD__) && !defined(NOTPARMDECL)
+#if !defined(LINUX) && !defined(__FreeBSD__) && !defined(NOTPARMDECL) && !defined(__CYGWIN__)
 extern char *tparm();
 #endif
 
