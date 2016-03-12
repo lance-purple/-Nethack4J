@@ -340,7 +340,8 @@ WINBELIB = -lbe
 # If ZLIB_COMP is defined in config.h this is necessary to link with zlib.
 # LIBS = -lz
 #
-LIBS =
+
+LIBS = -L/cygdrive/c/Program\ Files/Java/jdk1.8.0_40/jre/bin/server -ljvm
 
 # make NetHack
 GAME     = nethack

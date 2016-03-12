@@ -7,6 +7,22 @@ HACK=$HACKDIR/nethack
 # NB: MAXNROFPLAYERS is deprecated in favor of MAXPLAYERS in SYSCF.
 MAXNROFPLAYERS=4
 
+JAVA_HOME="/cygdrive/c/Program Files/Java/jre1.8.0_71"
+export JAVA_HOME
+
+if [[ $PATH != ?(*:)$JAVA_HOME/bin/server?(:*) ]]
+then
+    PATH="$PATH:$JAVA_HOME/bin/server"
+fi
+
+NETHACKOPTIONS=windowtype:java
+export NETHACKOPTIONS
+
+if [[ $CLASSPATH != ?(*:)/usr/games/lib/nethackdir?(:*) ]]
+then
+	CLASSPATH="$CLASSPATH:/usr/games/lib/nethackdir"
+fi
+
 # Since Nethack.ad is installed in HACKDIR, add it to XUSERFILESEARCHPATH
 case "x$XUSERFILESEARCHPATH" in
 x)	XUSERFILESEARCHPATH="$HACKDIR/%N.ad"

@@ -7,6 +7,12 @@
 
 #define E extern
 
+#include <jni.h>
+#include <limits.h>
+
+E JNIEnv* jni_env;
+E JavaVM* java_vm;
+
 /* ### alloc.c ### */
 
 #if 0

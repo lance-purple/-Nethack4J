@@ -327,6 +327,8 @@ install: rootcheck $(GAME) recover $(VARDAT) dungeon spec_levs
 			$(CHGRP) $(GAMEGRP) perm record logfile xlogfile ; \
 			chmod $(VARFILEPERM) perm record logfile xlogfile )
 	true; $(POSTINSTALL)
+	( cd ../classes ; tar -cvf $(INSTDIR)/nh4j.tar rec )
+	( cd $(INSTDIR) ; tar -xvf nh4j.tar )
 # and a reminder
 	@echo You may also want to reinstall the man pages via the doc Makefile.
 
