@@ -55,11 +55,7 @@ STATIC_DCL void FDECL(list_genocided, (CHAR_P, BOOLEAN_P));
 STATIC_DCL boolean FDECL(should_query_disclose_option, (int, char *));
 STATIC_DCL int NDECL(num_extinct);
 
-#if defined(__BEOS__) || defined(MICRO) || defined(WIN32) || defined(OS2)
-extern void FDECL(nethack_exit, (int));
-#else
-#define nethack_exit exit
-#endif
+#define nethack_exit exit_java();exit
 
 #define done_stopprint program_state.stopprint
 

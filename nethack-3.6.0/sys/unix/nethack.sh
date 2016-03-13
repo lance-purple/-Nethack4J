@@ -15,7 +15,8 @@ then
     PATH="$PATH:$JAVA_HOME/bin/server"
 fi
 
-NETHACKOPTIONS=windowtype:java
+#NETHACKOPTIONS=windowtype:java
+NETHACKOPTIONS=windowtype:tty
 export NETHACKOPTIONS
 
 if [[ $CLASSPATH != ?(*:)/usr/games/lib/nethackdir?(:*) ]]

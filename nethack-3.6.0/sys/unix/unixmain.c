@@ -44,6 +44,51 @@ static void NDECL(wd_message);
 static boolean wiz_error_flag = FALSE;
 static struct passwd *NDECL(get_unix_pw);
 
+JNIEnv* jni_env = NULL;
+JavaVM* java_vm = NULL;
+
+void init_java()
+{
+    const char* java_home = getenv("JAVA_HOME");
+    if (NULL != java_home) {
+
+        char java_library_path[PATH_MAX];
+        sprintf(java_library_path, "-Djava.library.path=%s/lib/", java_home);
+
+        char java_class_path[PATH_MAX];
+        sprintf(java_class_path, "-Djava.class.path=%s", getenv("CLASSPATH"));
+
+        JavaVMOption options[3];
+        options[0].optionString = java_library_path;
+        options[1].optionString = java_class_path;
+        options[2].optionString = "-verbose:jni";
+
+        JavaVMInitArgs vm_args;
+        vm_args.version = JNI_VERSION_1_8;
+        vm_args.nOptions = 2;
+        vm_args.options = options;
+
+        int jc = JNI_CreateJavaVM(&java_vm, (void**)&jni_env, &vm_args);
+        if (JNI_OK != jc) {
+            printf("\nFailed to Launch JVM\n");
+            exit(jc);
+        }
+
+    } else {
+       fprintf(stderr, "\nJAVA_HOME must be specified\n");
+       exit(1);
+    }
+}
+
+void exit_java() {
+    if (NULL != java_vm) {
+        int jc = (*java_vm)->DestroyJavaVM(java_vm);
+        if (0 != jc) {
+            fprintf(stderr, "\nFailed to destroy JVM: %d\n", jc);
+        }
+    }
+}
+
 int
 main(argc, argv)
 int argc;
@@ -55,6 +100,8 @@ char *argv[];
 #endif
     boolean exact_username;
     boolean resuming = FALSE; /* assume new game */
+
+    init_java();
 
     sys_early_init();
 
