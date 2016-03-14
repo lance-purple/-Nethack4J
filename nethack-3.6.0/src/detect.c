@@ -841,7 +841,7 @@ const char *
 level_distance(where)
 d_level *where;
 {
-    register schar ll = depth(&u.uz) - depth(where);
+    register schar ll = uz_depth() - depth(where);
     register boolean indun = (u.uz.dnum == where->dnum);
 
     if (ll < 0) {

@@ -464,11 +464,11 @@ boolean mkspecl;
         return;
     }
 
-    if (rn2(100) < depth(&u.uz) && !MON_AT(sx, sy)
+    if (rn2(100) < uz_depth() && !MON_AT(sx, sy)
         && (ptr = mkclass(S_MIMIC, 0)) != 0
         && (mtmp = makemon(ptr, sx, sy, NO_MM_FLAGS)) != 0) {
         /* note: makemon will set the mimic symbol to a shop item */
-        if (rn2(10) >= depth(&u.uz)) {
+        if (rn2(10) >= uz_depth()) {
             mtmp->m_ap_type = M_AP_OBJECT;
             mtmp->mappearance = STRANGE_OBJECT;
         }
