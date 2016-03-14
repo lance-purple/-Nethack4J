@@ -1570,8 +1570,8 @@ struct obj *sobj; /* scroll, or fake spellbook object for scroll-like spell */
         break;
     case SCR_EARTH:
         /* TODO: handle steeds */
-        if (!Is_rogue_level(&u.uz) && has_ceiling(&u.uz)
-            && (!In_endgame(&u.uz) || Is_earthlevel(&u.uz))) {
+        if (!Is_rogue_level(&u.uz) && uz_has_ceiling()
+            && (!In_endgame(&u.uz) || uz_is_earthlevel())) {
             register int x, y;
             int nboulders = 0;
 
@@ -1880,7 +1880,7 @@ struct obj *obj;
     }
 
     /* No-op when swallowed or in water */
-    if (u.uswallow || Underwater || Is_waterlevel(&u.uz))
+    if (u.uswallow || Underwater || uz_is_waterlevel())
         return;
     /*
      *  If we are darkening the room and the hero is punished but not

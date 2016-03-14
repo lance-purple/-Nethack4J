@@ -2118,7 +2118,7 @@ boolean tipping; /* caller emptying entire contents; affects shop handling */
         if (!tipping) {
             obj = hold_another_object(
                 obj, u.uswallow ? "Oops!  %s out of your reach!"
-                                : (Is_airlevel(&u.uz) || Is_waterlevel(&u.uz)
+                                : (uz_is_airlevel() || uz_is_waterlevel()
                                    || levl[u.ux][u.uy].typ < IRONBARS
                                    || levl[u.ux][u.uy].typ >= ICE)
                                       ? "Oops!  %s away from you!"

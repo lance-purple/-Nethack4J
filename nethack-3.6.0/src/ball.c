@@ -132,7 +132,7 @@ void
 unplacebc()
 {
     if (u.uswallow) {
-        if (Is_waterlevel(&u.uz)) {
+        if (uz_is_waterlevel()) {
             /* we need to proceed with the removal from the floor
              * so that movebubbles() processing will disregard it as
              * intended. Ignore all the vision stuff.

@@ -203,11 +203,11 @@ int x, y;
         if (verbose)
             pline_The("altar is too hard to break apart.");
         return FALSE;
-    } else if (Is_airlevel(&u.uz)) {
+    } else if (uz_is_airlevel()) {
         if (verbose)
             You("cannot %s thin air.", verb);
         return FALSE;
-    } else if (Is_waterlevel(&u.uz)) {
+    } else if (uz_is_waterlevel()) {
         if (verbose)
             pline_The("water splashes and subsides.");
         return FALSE;
@@ -383,7 +383,7 @@ dig(VOID_ARGS)
             digtxt = "The boulder falls apart.";
         } else if (lev->typ == STONE || lev->typ == SCORR
                    || IS_TREE(lev->typ)) {
-            if (Is_earthlevel(&u.uz)) {
+            if (uz_is_earthlevel()) {
                 if (uwep->blessed && !rn2(3)) {
                     mkcavearea(FALSE);
                     goto cleanup;
@@ -440,7 +440,7 @@ dig(VOID_ARGS)
         if (dmgtxt)
             pay_for_damage(dmgtxt, FALSE);
 
-        if (Is_earthlevel(&u.uz) && !rn2(3)) {
+        if (uz_is_earthlevel() && !rn2(3)) {
             register struct monst *mtmp;
 
             switch (rn2(2)) {
@@ -1139,7 +1139,7 @@ struct obj *obj;
             }
             set_occupation(dig, verbing, 0);
         }
-    } else if (Is_airlevel(&u.uz) || Is_waterlevel(&u.uz)) {
+    } else if (uz_is_airlevel() || uz_is_waterlevel()) {
         /* it must be air -- water checked above */
         You("swing %s through thin air.", yobjnam(obj, (char *) 0));
     } else if (!can_reach_floor(FALSE)) {
@@ -1398,7 +1398,7 @@ zap_dig()
     } /* swallowed */
 
     if (u.dz) {
-        if (!Is_airlevel(&u.uz) && !Is_waterlevel(&u.uz) && !Underwater) {
+        if (!uz_is_airlevel() && !uz_is_waterlevel() && !Underwater) {
             if (u.dz < 0 || On_stairs(u.ux, u.uy)) {
                 int dmg;
                 if (On_stairs(u.ux, u.uy))
@@ -1427,7 +1427,7 @@ zap_dig()
 
     /* normal case: digging across the level */
     shopdoor = shopwall = FALSE;
-    maze_dig = level.flags.is_maze_lev && !Is_earthlevel(&u.uz);
+    maze_dig = level.flags.is_maze_lev && !uz_is_earthlevel();
     zx = u.ux + u.dx;
     zy = u.uy + u.dy;
     if (u.utrap && u.utraptype == TT_PIT

@@ -227,7 +227,7 @@
      && !BFlying)
 /* May touch surface; does not override any others */
 
-#define Wwalking (u.uprops[WWALKING].extrinsic && !Is_waterlevel(&u.uz))
+#define Wwalking (u.uprops[WWALKING].extrinsic && !uz_is_waterlevel())
 /* Don't get wet, can't go under water; overrides others except levitation */
 /* Wwalking is meaningless on water level */
 

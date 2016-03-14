@@ -535,7 +535,7 @@ xchar x, y;
     if (is_pool(x, y)) {
         /* you're in the water too; significantly reduce range */
         range = range / 3 + 1; /* {1,2}=>1, {3,4,5}=>2, {6,7,8}=>3 */
-    } else if (Is_airlevel(&u.uz) || Is_waterlevel(&u.uz)) {
+    } else if (uz_is_airlevel() || uz_is_waterlevel()) {
         /* you're in air, since is_pool did not match */
         range += rnd(3);
     } else {
@@ -860,7 +860,7 @@ dokick()
          */
         if (isok(xx, yy) && !IS_ROCK(levl[xx][yy].typ)
             && !IS_DOOR(levl[xx][yy].typ)
-            && (!Is_airlevel(&u.uz) || !OBJ_AT(xx, yy))) {
+            && (!uz_is_airlevel() || !OBJ_AT(xx, yy))) {
             You("have nothing to brace yourself against.");
             return 0;
         }
@@ -921,7 +921,7 @@ dokick()
             map_invisible(x, y);
         }
         /* recoil if floating */
-        if ((Is_airlevel(&u.uz) || Levitation) && context.move) {
+        if ((uz_is_airlevel() || Levitation) && context.move) {
             int range;
 
             range =
@@ -946,10 +946,10 @@ dokick()
         return 1;
     }
 
-    if (OBJ_AT(x, y) && (!Levitation || Is_airlevel(&u.uz)
-                         || Is_waterlevel(&u.uz) || sobj_at(BOULDER, x, y))) {
+    if (OBJ_AT(x, y) && (!Levitation || uz_is_airlevel()
+                         || uz_is_waterlevel() || sobj_at(BOULDER, x, y))) {
         if (kick_object(x, y)) {
-            if (Is_airlevel(&u.uz))
+            if (uz_is_airlevel())
                 hurtle(-u.dx, -u.dy, 1, TRUE); /* assume it's light */
             return 1;
         }
@@ -1212,7 +1212,7 @@ dokick()
                 set_wounded_legs(RIGHT_SIDE, 5 + rnd(5));
             dmg = rnd(ACURR(A_CON) > 15 ? 3 : 5);
             losehp(Maybe_Half_Phys(dmg), kickstr(buf), KILLED_BY);
-            if (Is_airlevel(&u.uz) || Levitation)
+            if (uz_is_airlevel() || Levitation)
                 hurtle(-u.dx, -u.dy, rn1(2, 4), TRUE); /* assume it's heavy */
             return 1;
         }
@@ -1232,7 +1232,7 @@ dokick()
             exercise(A_STR, FALSE);
             set_wounded_legs(RIGHT_SIDE, 5 + rnd(5));
         }
-        if ((Is_airlevel(&u.uz) || Levitation) && rn2(2))
+        if ((uz_is_airlevel() || Levitation) && rn2(2))
             hurtle(-u.dx, -u.dy, 1, TRUE);
         return 1; /* uses a turn */
     }

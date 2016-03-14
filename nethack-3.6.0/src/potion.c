@@ -738,7 +738,7 @@ register struct obj *otmp;
         if (Free_action) {
             You("stiffen momentarily.");
         } else {
-            if (Levitation || Is_airlevel(&u.uz) || Is_waterlevel(&u.uz))
+            if (Levitation || uz_is_airlevel() || uz_is_waterlevel())
                 You("are motionlessly suspended.");
             else if (u.usteed)
                 You("are frozen in place!");
@@ -982,7 +982,7 @@ register struct obj *otmp;
                     || (xupladder && u.ux == xupladder
                         && u.uy == yupladder)) {
                     (void) doup();
-                } else if (has_ceiling(&u.uz)) {
+                } else if (uz_has_ceiling()) {
                     int dmg = uarmh ? 1 : rnd(10);
 
                     You("hit your %s on the %s.", body_part(HEAD),

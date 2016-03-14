@@ -1325,11 +1325,10 @@ d_level *lev;
 }
 
 boolean
-has_ceiling(lev)
-d_level *lev;
+uz_has_ceiling()
 {
     /* [what about level 1 of the quest?] */
-    return (boolean) (!Is_airlevel(lev) && !Is_waterlevel(lev));
+    return (boolean) (!uz_is_airlevel() && !uz_is_waterlevel());
 }
 
 /*
@@ -1918,8 +1917,8 @@ xchar *rdgn;
      * created by the level compiler (not the dungeon compiler) only exist
      * one per level (currently true, of course).
      */
-    else if (Is_earthlevel(&u.uz) || Is_waterlevel(&u.uz)
-             || Is_firelevel(&u.uz) || Is_airlevel(&u.uz)) {
+    else if (uz_is_earthlevel() || uz_is_waterlevel()
+             || uz_is_firelevel() || uz_is_airlevel()) {
         struct trap *trap;
         for (trap = ftrap; trap; trap = trap->ntrap)
             if (trap->ttyp == MAGIC_PORTAL)

@@ -1506,7 +1506,7 @@ struct obj *obj;
 
         if (!Blind)
             what = "goes", where = "dark";
-        else if (Levitation || Is_airlevel(&u.uz) || Is_waterlevel(&u.uz))
+        else if (Levitation || uz_is_airlevel() || uz_is_waterlevel())
             what = "you lose control of", where = "yourself";
         else
             what = "you slap against the",

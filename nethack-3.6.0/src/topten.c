@@ -149,13 +149,13 @@ uz_observable_depth()
     if (In_endgame(lev)) {
         if (uz_is_astralevel())
             return -5;
-        else if (Is_waterlevel(lev))
+        else if (uz_is_waterlevel())
             return -4;
-        else if (Is_firelevel(lev))
+        else if (uz_is_firelevel())
             return -3;
-        else if (Is_airlevel(lev))
+        else if (uz_is_airlevel())
             return -2;
-        else if (Is_earthlevel(lev))
+        else if (uz_is_earthlevel())
             return -1;
         else
             return 0; /* ? */

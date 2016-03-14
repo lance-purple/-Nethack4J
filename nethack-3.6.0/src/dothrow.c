@@ -825,7 +825,7 @@ boolean hitsroof;
                          && touch_petrifies(&mons[obj->corpsenm]));
     /* note: obj->quan == 1 */
 
-    if (!has_ceiling(&u.uz)) {
+    if (!uz_has_ceiling()) {
         action = "flies up into"; /* into "the sky" or "the water above" */
     } else if (hitsroof) {
         if (breaktest(obj)) {
@@ -1016,7 +1016,7 @@ boolean
         && (Upolyd ? (u.mh < 5 && u.mh != u.mhmax)
                    : (u.uhp < 10 && u.uhp != u.uhpmax))
         && obj->owt > (unsigned) ((Upolyd ? u.mh : u.uhp) * 2)
-        && !Is_airlevel(&u.uz)) {
+        && !uz_is_airlevel()) {
         You("have so little stamina, %s drops from your grasp.",
             the(xname(obj)));
         exercise(A_CON, FALSE);
@@ -1054,7 +1054,7 @@ boolean
         return;
 
     } else if (obj->otyp == BOOMERANG && !Underwater) {
-        if (Is_airlevel(&u.uz) || Levitation)
+        if (uz_is_airlevel() || Levitation)
             hurtle(-u.dx, -u.dy, 1, TRUE);
         mon = boomhit(obj, u.dx, u.dy);
         if (mon == &youmonst) { /* the thing was caught */
@@ -1101,7 +1101,7 @@ boolean
                 range /= 2;
         }
 
-        if (Is_airlevel(&u.uz) || Levitation) {
+        if (uz_is_airlevel() || Levitation) {
             /* action, reaction... */
             urange -= range;
             if (urange < 1)
@@ -1127,7 +1127,7 @@ boolean
         thrownobj = obj; /* obj may be null now */
 
         /* have to do this after bhit() so u.ux & u.uy are correct */
-        if (Is_airlevel(&u.uz) || Levitation)
+        if (uz_is_airlevel() || Levitation)
             hurtle(-u.dx, -u.dy, urange, TRUE);
 
         if (!obj)
@@ -1938,8 +1938,8 @@ struct obj *obj;
     }
 
     if (u.dz) {
-        if (u.dz < 0 && !Is_airlevel(&u.uz) && !Underwater
-            && !Is_waterlevel(&u.uz)) {
+        if (u.dz < 0 && !uz_is_airlevel() && !Underwater
+            && !uz_is_waterlevel()) {
             pline_The("gold hits the %s, then falls back on top of your %s.",
                       ceiling(u.ux, u.uy), body_part(HEAD));
             /* some self damage? */

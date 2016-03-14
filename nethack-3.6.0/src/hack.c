@@ -111,7 +111,7 @@ moverock()
         rx = u.ux + 2 * u.dx; /* boulder destination position */
         ry = u.uy + 2 * u.dy;
         nomul(0);
-        if (Levitation || Is_airlevel(&u.uz)) {
+        if (Levitation || uz_is_airlevel()) {
             if (Blind)
                 feel_location(sx, sy);
             You("don't have enough leverage to push %s.", the(xname(otmp)));
@@ -1189,7 +1189,7 @@ u_rooted()
 {
     if (!youmonst.data->mmove) {
         You("are rooted %s.",
-            Levitation || Is_airlevel(&u.uz) || Is_waterlevel(&u.uz)
+            Levitation || uz_is_airlevel() || uz_is_waterlevel()
                 ? "in place"
                 : "to the ground");
         nomul(0);
@@ -1224,7 +1224,7 @@ domove()
          || (wtcap > SLT_ENCUMBER
              && (Upolyd ? (u.mh < 5 && u.mh != u.mhmax)
                         : (u.uhp < 10 && u.uhp != u.uhpmax))))
-        && !Is_airlevel(&u.uz)) {
+        && !uz_is_airlevel()) {
         if (wtcap < OVERLOADED) {
             You("don't have enough stamina to move.");
             exercise(A_CON, FALSE);
@@ -1239,7 +1239,7 @@ domove()
         u.uy = y = u.ustuck->my;
         mtmp = u.ustuck;
     } else {
-        if (Is_airlevel(&u.uz) && rn2(4) && !Levitation && !Flying) {
+        if (uz_is_airlevel() && rn2(4) && !Levitation && !Flying) {
             switch (rn2(3)) {
             case 0:
                 You("tumble in place.");
@@ -1466,7 +1466,7 @@ domove()
                because you don't see remembered terrain while underwater;
                although the hero can attack an adjacent monster this way,
                assume he can't reach out far enough to distinguish terrain */
-            Sprintf(buf, (Is_waterlevel(&u.uz) && levl[x][y].typ == AIR)
+            Sprintf(buf, (uz_is_waterlevel() && levl[x][y].typ == AIR)
                              ? "an air bubble"
                              : "nothing");
         else if (solid)
@@ -1765,7 +1765,7 @@ switch_terrain()
 {
     struct rm *lev = &levl[u.ux][u.uy];
     boolean blocklev = (IS_ROCK(lev->typ) || closed_door(u.ux, u.uy)
-                        || (Is_waterlevel(&u.uz) && lev->typ == WATER));
+                        || (uz_is_waterlevel() && lev->typ == WATER));
 
     if (blocklev) {
         /* called from spoteffects(), skip float_down() */
@@ -1806,14 +1806,14 @@ boolean newspot;             /* true if called by spoteffects */
         boolean still_inwater = FALSE; /* assume we're getting out */
 
         if (!is_pool(u.ux, u.uy)) {
-            if (Is_waterlevel(&u.uz))
+            if (uz_is_waterlevel())
                 You("pop into an air bubble.");
             else if (is_lava(u.ux, u.uy))
                 You("leave the water..."); /* oops! */
             else
                 You("are on solid %s again.",
                     is_ice(u.ux, u.uy) ? "ice" : "land");
-        } else if (Is_waterlevel(&u.uz)) {
+        } else if (uz_is_waterlevel()) {
             still_inwater = TRUE;
         } else if (Levitation) {
             You("pop out of the water like a cork!");
@@ -1825,7 +1825,7 @@ boolean newspot;             /* true if called by spoteffects */
             still_inwater = TRUE;
         }
         if (!still_inwater) {
-            boolean was_underwater = (Underwater && !Is_waterlevel(&u.uz));
+            boolean was_underwater = (Underwater && !uz_is_waterlevel());
 
             u.uinwater = 0;       /* leave the water */
             if (was_underwater) { /* restore vision */
@@ -1848,7 +1848,7 @@ boolean newspot;             /* true if called by spoteffects */
             dismount_steed(Underwater ? DISMOUNT_FELL : DISMOUNT_GENERIC);
             /* dismount_steed() -> float_down() -> pickup()
                (float_down doesn't do autopickup on Air or Water) */
-            if (Is_airlevel(&u.uz) || Is_waterlevel(&u.uz))
+            if (uz_is_airlevel() || uz_is_waterlevel())
                 return FALSE;
             /* even if we actually end up at same location, float_down()
                has already done spoteffect()'s trap and pickup actions */
@@ -2699,7 +2699,7 @@ weight_cap()
             carrcap = (carrcap * (long) youmonst.data->cwt / WT_HUMAN);
     }
 
-    if (Levitation || Is_airlevel(&u.uz) /* pugh@cornell */
+    if (Levitation || uz_is_airlevel() /* pugh@cornell */
         || (u.usteed && strongmonst(u.usteed->data)))
         carrcap = MAX_CARR_CAP;
     else {

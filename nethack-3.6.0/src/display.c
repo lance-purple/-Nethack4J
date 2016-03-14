@@ -534,7 +534,7 @@ xchar x, y;
         return;
 
     /* The hero can't feel non pool locations while under water. */
-    if (Underwater && !Is_waterlevel(&u.uz) && !is_pool(x, y))
+    if (Underwater && !uz_is_waterlevel() && !is_pool(x, y))
         return;
 
     /* Set the seen vector as if the hero had seen it.
@@ -694,7 +694,7 @@ register int x, y;
             display_self();
         return;
     }
-    if (Underwater && !Is_waterlevel(&u.uz)) {
+    if (Underwater && !uz_is_waterlevel()) {
         /* don't do anything unless (x,y) is an adjacent underwater position
          */
         int dx, dy;
@@ -1076,7 +1076,7 @@ int mode;
     register int x, y;
 
     /* swallowing has a higher precedence than under water */
-    if (Is_waterlevel(&u.uz) || u.uswallow)
+    if (uz_is_waterlevel() || u.uswallow)
         return;
 
     /* full update */
@@ -1269,7 +1269,7 @@ docrt()
         swallowed(1);
         return;
     }
-    if (Underwater && !Is_waterlevel(&u.uz)) {
+    if (Underwater && !uz_is_waterlevel()) {
         under_water(1);
         return;
     }

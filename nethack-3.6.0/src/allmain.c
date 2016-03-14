@@ -199,7 +199,7 @@ boolean resuming;
                         wtcap = UNENCUMBERED;
                     } else if (Upolyd && youmonst.data->mlet == S_EEL
                                && !is_pool(u.ux, u.uy)
-                               && !Is_waterlevel(&u.uz)) {
+                               && !uz_is_waterlevel()) {
                         /* eel out of water loses hp, same as for monsters;
                            as hp gets lower, rate of further loss slows down
                            */
@@ -331,9 +331,9 @@ boolean resuming;
                     }
                     restore_attrib();
                     /* underwater and waterlevel vision are done here */
-                    if (Is_waterlevel(&u.uz) || Is_airlevel(&u.uz))
+                    if (uz_is_waterlevel() || uz_is_airlevel())
                         movebubbles();
-                    else if (Is_firelevel(&u.uz))
+                    else if (uz_is_firelevel())
                         fumaroles();
                     else if (Underwater)
                         under_water(0);
