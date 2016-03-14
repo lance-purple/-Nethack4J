@@ -3117,7 +3117,7 @@ boolean msg;      /* "The oldmon turns into a newmon!" */
 
     mgender_from_permonst(mtmp, mdat);
 
-    if (In_endgame(&u.uz) && is_mplayer(olddata) && has_mname(mtmp)) {
+    if (uz_in_endgame() && is_mplayer(olddata) && has_mname(mtmp)) {
         /* mplayers start out as "Foo the Bar", but some of the
          * titles are inappropriate when polymorphed, particularly
          * into the opposite sex.  players don't use ranks when

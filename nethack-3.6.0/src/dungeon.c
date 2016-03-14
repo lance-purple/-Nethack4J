@@ -1578,7 +1578,7 @@ level_difficulty()
 {
     int res;
 
-    if (In_endgame(&u.uz)) {
+    if (uz_in_endgame()) {
         res = depth(&sanctum_level) + u.ulevel / 2;
     } else if (u.uhave.amulet) {
         res = deepest_lev_reached(FALSE);
@@ -1706,7 +1706,7 @@ boolean unplaced;
 
     if (unplaced)
         return TRUE;
-    if (In_endgame(&u.uz) && !In_endgame(lvl_p))
+    if (uz_in_endgame() && !In_endgame(lvl_p))
         return TRUE;
     if ((dummy = find_level("dummy")) != 0 && on_level(lvl_p, &dummy->dlevel))
         return TRUE;
@@ -1818,7 +1818,7 @@ xchar *rdgn;
     }
 
     for (i = 0, dptr = dungeons; i < n_dgns; i++, dptr++) {
-        if (bymenu && In_endgame(&u.uz) && i != astral_level.dnum)
+        if (bymenu && uz_in_endgame() && i != astral_level.dnum)
             continue;
         unplaced = unplaced_floater(dptr);
         descr = unplaced ? "depth" : "level";
@@ -2220,7 +2220,7 @@ mapseen *mptr;
     /* when in the endgame, list all endgame levels visited, whether they
        have annotations or not, so that #overview doesn't become extremely
        sparse once the rest of the dungeon has been flagged as unreachable */
-    if (In_endgame(&u.uz))
+    if (uz_in_endgame())
         return (boolean) In_endgame(&mptr->lev);
     /* level is of interest if it has non-zero feature count or known bones
        or user annotation or known connection to another dungeon branch
@@ -2521,10 +2521,10 @@ int reason; /* how hero died; used when disclosing end-of-game level */
     win = create_nhwindow(NHW_MENU);
     /* show the endgame levels before the rest of the dungeon,
        so that the Planes (dnum 5-ish) come out above main dungeon (dnum 0) */
-    if (In_endgame(&u.uz))
+    if (uz_in_endgame())
         traverse_mapseenchn(TRUE, win, why, reason, &lastdun);
     /* if game is over or we're not in the endgame yet, show the dungeon */
-    if (why > 0 || !In_endgame(&u.uz))
+    if (why > 0 || !uz_in_endgame())
         traverse_mapseenchn(FALSE, win, why, reason, &lastdun);
     display_nhwindow(win, TRUE);
     destroy_nhwindow(win);

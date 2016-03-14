@@ -273,7 +273,7 @@ char *buf;
         Sprintf(buf, "%s ", dungeons[u.uz.dnum].dname);
     else if (In_quest(&u.uz))
         Sprintf(buf, "Home %d ", dunlev(&u.uz));
-    else if (In_endgame(&u.uz))
+    else if (uz_in_endgame())
         Sprintf(buf, uz_is_astralevel() ? "Astral Plane " : "End Game ");
     else {
         /* ports with more room may expand this one */

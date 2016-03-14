@@ -689,7 +689,7 @@ int mntmp;
      */
     mlvl = (int) mons[mntmp].mlevel;
     if (youmonst.data->mlet == S_DRAGON && mntmp >= PM_GRAY_DRAGON) {
-        u.mhmax = In_endgame(&u.uz) ? (8 * mlvl) : (4 * mlvl + d(mlvl, 4));
+        u.mhmax = uz_in_endgame() ? (8 * mlvl) : (4 * mlvl + d(mlvl, 4));
     } else if (is_golem(youmonst.data)) {
         u.mhmax = golemhp(mntmp);
     } else {

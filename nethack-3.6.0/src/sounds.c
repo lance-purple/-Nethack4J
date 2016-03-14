@@ -767,7 +767,7 @@ register struct monst *mtmp;
     /* else FALLTHRU */
     case MS_HUMANOID:
         if (!mtmp->mpeaceful) {
-            if (In_endgame(&u.uz) && is_mplayer(ptr))
+            if (uz_in_endgame() && is_mplayer(ptr))
                 mplayer_talk(mtmp);
             else
                 pline_msg = "threatens you.";

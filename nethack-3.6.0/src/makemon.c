@@ -883,7 +883,7 @@ struct monst *mon;
         /* arbitrary; such monsters won't be involved in draining anyway */
         hp = 4 + rnd(4); /* 5..8 */
     } else if (ptr->mlet == S_DRAGON && monsndx(ptr) >= PM_GRAY_DRAGON) {
-        /* adult dragons; newmonhp() uses In_endgame(&u.uz) ? 8 : 4 + rnd(4)
+        /* adult dragons; newmonhp() uses uz_in_endgame() ? 8 : 4 + rnd(4)
          */
         hp = 4 + rn2(5); /* 4..8 */
     } else if (!mon->m_lev) {
@@ -918,7 +918,7 @@ int mndx;
     } else if (ptr->mlet == S_DRAGON && mndx >= PM_GRAY_DRAGON) {
         /* adult dragons */
         mon->mhpmax = mon->mhp =
-            (int) (In_endgame(&u.uz)
+            (int) (uz_in_endgame()
                        ? (8 * mon->m_lev)
                        : (4 * mon->m_lev + d((int) mon->m_lev, 4)));
     } else if (!mon->m_lev) {
@@ -1451,7 +1451,7 @@ rndmonst()
         /* determine the level of the strongest monster to make. */
         maxmlev = (zlevel + u.ulevel) / 2;
         upper = Is_rogue_level(&u.uz);
-        elemlevel = In_endgame(&u.uz) && !uz_is_astralevel();
+        elemlevel = uz_in_endgame() && !uz_is_astralevel();
 
         /*
          * Find out how many monsters exist in the range we have selected.

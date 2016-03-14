@@ -981,7 +981,7 @@ wiz_map_levltyp(VOID_ARGS)
             Strcat(dsc, " gehennom");
         else if (u.uz.dnum == tower_dnum)
             Strcat(dsc, " vlad");
-        else if (In_endgame(&u.uz))
+        else if (uz_in_endgame())
             Strcat(dsc, " endgame");
         else {
             /* somebody's added a dungeon branch we're not expecting */

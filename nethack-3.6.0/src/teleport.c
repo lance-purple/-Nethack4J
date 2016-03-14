@@ -594,7 +594,7 @@ level_tele()
     char buf[BUFSZ];
     boolean force_dest = FALSE;
 
-    if ((u.uhave.amulet || In_endgame(&u.uz) || In_sokoban(&u.uz))
+    if ((u.uhave.amulet || uz_in_endgame() || In_sokoban(&u.uz))
         && !wizard) {
         You_feel("very disoriented for a moment.");
         return;
@@ -634,7 +634,7 @@ level_tele()
 
                 newlevel.dnum = destdnum;
                 newlevel.dlevel = destlev;
-                if (In_endgame(&newlevel) && !In_endgame(&u.uz)) {
+                if (In_endgame(&newlevel) && !uz_in_endgame()) {
                     struct obj *amu;
 
                     if (!u.uhave.amulet
@@ -708,7 +708,7 @@ level_tele()
         You1(shudder_for_moment);
         return;
     }
-    if (In_endgame(&u.uz)) { /* must already be wizard */
+    if (uz_in_endgame()) { /* must already be wizard */
         int llimit = dunlevs_in_dungeon(&u.uz);
 
         if (newlev >= 0 || newlev <= -llimit) {
@@ -840,7 +840,7 @@ register struct trap *ttmp;
      * the endgame, from accidently triggering the portal to the
      * next level, and thus losing the game
      */
-    if (In_endgame(&u.uz) && !u.uhave.amulet) {
+    if (uz_in_endgame() && !u.uhave.amulet) {
         You_feel("dizzy for a moment, but nothing happens...");
         return;
     }
@@ -855,7 +855,7 @@ void
 tele_trap(trap)
 struct trap *trap;
 {
-    if (In_endgame(&u.uz) || Antimagic) {
+    if (uz_in_endgame() || Antimagic) {
         if (Antimagic)
             shieldeff(u.ux, u.uy);
         You_feel("a wrenching sensation.");
@@ -879,7 +879,7 @@ struct trap *trap;
     if (Antimagic) {
         shieldeff(u.ux, u.uy);
     }
-    if (Antimagic || In_endgame(&u.uz)) {
+    if (Antimagic || uz_in_endgame()) {
         You_feel("a wrenching sensation.");
         return;
     }
@@ -1147,7 +1147,7 @@ int in_sight;
                 get_level(&tolevel, uz_depth() + 1);
             }
         } else if (tt == MAGIC_PORTAL) {
-            if (In_endgame(&u.uz)
+            if (uz_in_endgame()
                 && (mon_has_amulet(mtmp) || is_home_elemental(mptr))) {
                 if (in_sight && mptr->mlet != S_ELEMENTAL) {
                     pline("%s seems to shimmer for a moment.", Monnam(mtmp));
@@ -1161,7 +1161,7 @@ int in_sight;
         } else { /* (tt == LEVEL_TELEP) */
             int nlev;
 
-            if (mon_has_amulet(mtmp) || In_endgame(&u.uz)) {
+            if (mon_has_amulet(mtmp) || uz_in_endgame()) {
                 if (in_sight)
                     pline("%s seems very disoriented for a moment.",
                           Monnam(mtmp));
@@ -1253,7 +1253,7 @@ random_teleport_level()
     int nlev, max_depth, min_depth, cur_depth = (int) uz_depth();
 
     /* [the endgame case can only occur in wizard mode] */
-    if (!rn2(5) || Is_knox(&u.uz) || In_endgame(&u.uz))
+    if (!rn2(5) || Is_knox(&u.uz) || uz_in_endgame())
         return cur_depth;
 
     /* What I really want to do is as follows:

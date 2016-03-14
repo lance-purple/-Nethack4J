@@ -1268,7 +1268,7 @@ boolean at_stairs, falling, portal;
     vision_full_recalc = 0; /* don't let that reenable vision yet */
     flush_screen(-1);       /* ensure all map flushes are postponed */
 
-    if (portal && !In_endgame(&u.uz)) {
+    if (portal && !uz_in_endgame()) {
         /* find the portal on the new level */
         register struct trap *ttrap;
 
@@ -1280,7 +1280,7 @@ boolean at_stairs, falling, portal;
             panic("goto_level: no corresponding portal!");
         seetrap(ttrap);
         u_on_newpos(ttrap->tx, ttrap->ty);
-    } else if (at_stairs && !In_endgame(&u.uz)) {
+    } else if (at_stairs && !uz_in_endgame()) {
         if (up) {
             if (at_ladder)
                 u_on_newpos(xdnladder, ydnladder);
@@ -1456,7 +1456,7 @@ boolean at_stairs, falling, portal;
     }
 
     /* special location arrival messages/events */
-    if (In_endgame(&u.uz)) {
+    if (uz_in_endgame()) {
         if (new &&on_level(&u.uz, &astral_level))
             final_level(); /* guardian angel,&c */
         else if (newdungeon && u.uhave.amulet)

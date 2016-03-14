@@ -895,7 +895,7 @@ boolean skip_lvl_checks;
         kelp_moat = 30;
 
     /* Place kelp, except on the plane of water */
-    if (!skip_lvl_checks && In_endgame(&u.uz))
+    if (!skip_lvl_checks && uz_in_endgame())
         return;
     for (x = 2; x < (COLNO - 2); x++)
         for (y = 1; y < (ROWNO - 1); y++)

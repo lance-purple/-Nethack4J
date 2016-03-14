@@ -980,7 +980,7 @@ boolean called;
             Strcat(buf, name);
             name_at_start = TRUE;
         }
-    } else if (is_mplayer(mdat) && !In_endgame(&u.uz)) {
+    } else if (is_mplayer(mdat) && !uz_in_endgame()) {
         char pbuf[BUFSZ];
 
         Strcpy(pbuf, rank_of((int) mtmp->m_lev, monsndx(mdat),

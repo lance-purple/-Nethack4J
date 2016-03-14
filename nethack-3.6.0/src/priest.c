@@ -400,7 +400,7 @@ int roomno;
         epri_p = EPRI(priest);
         shrined = has_shrine(priest);
         sanctum = (priest->data == &mons[PM_HIGH_PRIEST]
-                   && (Is_sanctum(&u.uz) || In_endgame(&u.uz)));
+                   && (Is_sanctum(&u.uz) || uz_in_endgame()));
         can_speak = (priest->mcanmove && !priest->msleeping);
         if (can_speak && !Deaf && moves >= epri_p->intone_time) {
             unsigned save_priest = priest->ispriest;

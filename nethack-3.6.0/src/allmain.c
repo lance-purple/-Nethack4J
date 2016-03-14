@@ -360,7 +360,7 @@ boolean resuming;
 
             if (context.bypasses)
                 clear_bypasses();
-            if ((u.uhave.amulet || Clairvoyant) && !In_endgame(&u.uz)
+            if ((u.uhave.amulet || Clairvoyant) && !uz_in_endgame()
                 && !BClairvoyant && !(moves % 15) && !rn2(2))
                 do_vicinity_map();
             if (u.utrap && u.utraptype == TT_LAVA)

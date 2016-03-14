@@ -787,7 +787,7 @@ rndtrap()
             break;
         case ROLLING_BOULDER_TRAP:
         case ROCKTRAP:
-            if (In_endgame(&u.uz))
+            if (uz_in_endgame())
                 rtrap = NO_TRAP;
             break;
         }

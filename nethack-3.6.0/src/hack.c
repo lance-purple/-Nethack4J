@@ -226,7 +226,7 @@ moverock()
 
                     if (ttmp->ttyp == LEVEL_TELEP) {
                         newlev = random_teleport_level();
-                        if (newlev == uz_depth() || In_endgame(&u.uz))
+                        if (newlev == uz_depth() || uz_in_endgame())
                             /* trap didn't work; skip "disappears" message */
                             goto dopush;
                     }

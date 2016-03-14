@@ -508,7 +508,7 @@ struct monst *mtmp;
             && !Sokoban
             /* digging wouldn't be effective; assume they know that */
             && !(levl[x][y].wall_info & W_NONDIGGABLE)
-            && !(Is_botlevel(&u.uz) || In_endgame(&u.uz))
+            && !(Is_botlevel(&u.uz) || uz_in_endgame())
             && !(is_ice(x, y) || is_pool(x, y) || is_lava(x, y))
             && !(mtmp->data == &mons[PM_VLAD_THE_IMPALER]
                  && In_V_tower(&u.uz))) {
@@ -692,7 +692,7 @@ struct monst *mtmp;
             int nlev;
             d_level flev;
 
-            if (mon_has_amulet(mtmp) || In_endgame(&u.uz)) {
+            if (mon_has_amulet(mtmp) || uz_in_endgame()) {
                 if (vismon)
                     pline("%s seems very disoriented for a moment.",
                           Monnam(mtmp));
@@ -1173,7 +1173,7 @@ struct monst *mtmp;
             && dist2(mtmp->mx, mtmp->my, mtmp->mux, mtmp->muy) <= 2
             && mtmp->mcansee && haseyes(mtmp->data)
             && !Is_rogue_level(&u.uz)
-            && (!In_endgame(&u.uz) || uz_is_earthlevel())) {
+            && (!uz_in_endgame() || uz_is_earthlevel())) {
             m.offensive = obj;
             m.has_offense = MUSE_SCR_EARTH;
         }
