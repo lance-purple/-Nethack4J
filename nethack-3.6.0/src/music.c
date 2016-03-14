@@ -287,7 +287,7 @@ int force;
                         pline_The("kitchen sink falls into a chasm.");
                     goto do_pit;
                 case ALTAR:
-                    if (Is_astralevel(&u.uz) || Is_sanctum(&u.uz))
+                    if (uz_is_astralevel() || Is_sanctum(&u.uz))
                         break;
 
                     if (cansee(x, y))

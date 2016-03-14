@@ -324,12 +324,12 @@ char *buf, *monbuf;
             Sprintf(buf, "%s %saltar",
                     /* like endgame high priests, endgame high altars
                        are only recognizable when immediately adjacent */
-                    (Is_astralevel(&u.uz) && distu(x, y) > 2)
+                    (uz_is_astralevel() && distu(x, y) > 2)
                         ? "aligned"
                         : align_str(
                               Amask2align(levl[x][y].altarmask & ~AM_SHRINE)),
                     ((levl[x][y].altarmask & AM_SHRINE)
-                     && (Is_astralevel(&u.uz) || Is_sanctum(&u.uz)))
+                     && (uz_is_astralevel() || Is_sanctum(&u.uz)))
                         ? "high "
                         : "");
             break;

@@ -198,7 +198,7 @@ int x, y;
             pline_The("throne is too hard to break apart.");
         return FALSE;
     } else if (IS_ALTAR(levl[x][y].typ)
-               && (madeby != BY_OBJECT || Is_astralevel(&u.uz)
+               && (madeby != BY_OBJECT || uz_is_astralevel()
                    || Is_sanctum(&u.uz))) {
         if (verbose)
             pline_The("altar is too hard to break apart.");

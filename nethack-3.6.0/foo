@@ -1,0 +1,1 @@
+vi src/botl.c src/dig.c src/do_name.c src/dungeon.c src/end.c src/invent.c src/makemon.c src/music.c src/pager.c src/pray.c src/priest.c src/sounds.c src/topten.c src/wizard.c

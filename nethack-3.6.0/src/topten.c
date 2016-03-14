@@ -147,7 +147,7 @@ uz_observable_depth()
     /* if we ever randomize the order of the elemental planes, we
        must use a constant external representation in the record file */
     if (In_endgame(lev)) {
-        if (Is_astralevel(lev))
+        if (uz_is_astralevel())
             return -5;
         else if (Is_waterlevel(lev))
             return -4;
@@ -406,7 +406,7 @@ encodeachieve()
         r |= 1L << 5;
     if (In_endgame(&u.uz))
         r |= 1L << 6;
-    if (Is_astralevel(&u.uz))
+    if (uz_is_astralevel())
         r |= 1L << 7;
     if (u.uachieve.ascended)
         r |= 1L << 8;

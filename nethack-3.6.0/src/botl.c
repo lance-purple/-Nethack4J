@@ -274,7 +274,7 @@ char *buf;
     else if (In_quest(&u.uz))
         Sprintf(buf, "Home %d ", dunlev(&u.uz));
     else if (In_endgame(&u.uz))
-        Sprintf(buf, Is_astralevel(&u.uz) ? "Astral Plane " : "End Game ");
+        Sprintf(buf, uz_is_astralevel() ? "Astral Plane " : "End Game ");
     else {
         /* ports with more room may expand this one */
         Sprintf(buf, "Dlvl:%-2d ", uz_depth());

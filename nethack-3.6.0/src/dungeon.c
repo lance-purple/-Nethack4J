@@ -2410,7 +2410,7 @@ recalc_mapseen()
                     mptr->feat.ngrave = count;
                 break;
             case ALTAR:
-                atmp = (Is_astralevel(&u.uz)
+                atmp = (uz_is_astralevel()
                         && (levl[x][y].seenv & SVALL) != SVALL)
                          ? MSA_NONE
                          : Amask2msa(levl[x][y].altarmask);

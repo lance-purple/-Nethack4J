@@ -563,7 +563,7 @@ resurrect()
 void
 intervene()
 {
-    int which = Is_astralevel(&u.uz) ? rnd(4) : rn2(6);
+    int which = uz_is_astralevel() ? rnd(4) : rn2(6);
     /* cases 0 and 5 don't apply on the Astral level */
     switch (which) {
     case 0:

@@ -95,7 +95,7 @@ typedef struct branch {
  *
  * Depth corresponds to the number of floors below the surface.
  */
-#define Is_astralevel(x) (on_level(x, &astral_level))
+#define uz_is_astralevel() (on_level(&u.uz, &astral_level))
 #define Is_earthlevel(x) (on_level(x, &earth_level))
 #define Is_waterlevel(x) (on_level(x, &water_level))
 #define Is_firelevel(x) (on_level(x, &fire_level))
