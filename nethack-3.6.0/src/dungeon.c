@@ -2438,7 +2438,7 @@ recalc_mapseen()
             /* else FALLTHRU */
             case DBWALL:
             case DRAWBRIDGE_DOWN:
-                if (Is_stronghold(&u.uz))
+                if (uz_is_stronghold())
                     mptr->flags.castle = 1, mptr->flags.castletune = 1;
                 else if (Is_knox(&u.uz))
                     mptr->flags.ludios = 1;

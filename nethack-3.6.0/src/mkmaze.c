@@ -483,7 +483,7 @@ fixup_special()
     } else if (Role_if(PM_PRIEST) && In_quest(&u.uz)) {
         /* less chance for undead corpses (lured from lower morgues) */
         level.flags.graveyard = 1;
-    } else if (Is_stronghold(&u.uz)) {
+    } else if (uz_is_stronghold()) {
         level.flags.graveyard = 1;
     } else if (Is_sanctum(&u.uz)) {
         croom = search_special(TEMPLE);

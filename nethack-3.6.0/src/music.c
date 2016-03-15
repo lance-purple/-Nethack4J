@@ -642,7 +642,7 @@ struct obj *instr;
         /* Check if there was the Stronghold drawbridge near
          * and if the tune conforms to what we're waiting for.
          */
-        if (Is_stronghold(&u.uz)) {
+        if (uz_is_stronghold()) {
             exercise(A_WIS, TRUE); /* just for trying */
             if (!strcmp(buf, tune)) {
                 /* Search for the drawbridge */

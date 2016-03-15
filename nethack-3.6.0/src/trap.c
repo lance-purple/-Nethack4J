@@ -515,7 +515,7 @@ boolean td; /* td == TRUE : trap door or hole */
 
     if (*u.ushops)
         shopdig(1);
-    if (Is_stronghold(&u.uz)) {
+    if (uz_is_stronghold()) {
         find_hell(&dtmp);
     } else {
         int dist = newlevel - dunlev(&u.uz);

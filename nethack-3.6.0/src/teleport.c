@@ -1136,7 +1136,7 @@ int in_sight;
         int migrate_typ = MIGR_RANDOM;
 
         if ((tt == HOLE || tt == TRAPDOOR)) {
-            if (Is_stronghold(&u.uz)) {
+            if (uz_is_stronghold()) {
                 assign_level(&tolevel, &valley_level);
             } else if (Is_botlevel(&u.uz)) {
                 if (in_sight && trap->tseen)

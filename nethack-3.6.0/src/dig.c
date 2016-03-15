@@ -697,7 +697,7 @@ int ttyp;
                 if (teleport_pet(mtmp, FALSE)) {
                     d_level tolevel;
 
-                    if (Is_stronghold(&u.uz)) {
+                    if (uz_is_stronghold()) {
                         assign_level(&tolevel, &valley_level);
                     } else if (Is_botlevel(&u.uz)) {
                         if (canseemon(mtmp))

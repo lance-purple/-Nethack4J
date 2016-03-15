@@ -701,7 +701,7 @@ int mode;
             return FALSE;
         } else {
             if (mode == DO_MOVE) {
-                if (Is_stronghold(&u.uz) && is_db_wall(x, y))
+                if (uz_is_stronghold() && is_db_wall(x, y))
                     pline_The("drawbridge is up!");
                 /* sokoban restriction stays even after puzzle is solved */
                 else if (Passes_walls && !may_passwall(x, y)

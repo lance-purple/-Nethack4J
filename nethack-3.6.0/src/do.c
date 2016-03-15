@@ -947,7 +947,7 @@ dodown()
         You("%s %s.", Flying ? "fly" : locomotion(youmonst.data, "jump"),
             trap->ttyp == HOLE ? "down the hole" : "through the trap door");
 
-    if (trap && Is_stronghold(&u.uz)) {
+    if (trap && uz_is_stronghold()) {
         goto_hell(FALSE, TRUE);
     } else {
         at_ladder = (boolean) (levl[u.ux][u.uy].typ == LADDER);

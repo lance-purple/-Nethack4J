@@ -113,6 +113,7 @@ typedef struct branch {
 #define Is_portal_level(x) (on_level(x, &portal_level))
 #define Is_rogue_level(x) (on_level(x, &rogue_level))
 #define Is_stronghold(x) (on_level(x, &stronghold_level))
+#define uz_is_stronghold() (on_level(&u.uz, &stronghold_level))
 #define Is_bigroom(x) (on_level(x, &bigroom_level))
 #define Is_qstart(x) (on_level(x, &qstart_level))
 #define Is_qlocate(x) (on_level(x, &qlocate_level))

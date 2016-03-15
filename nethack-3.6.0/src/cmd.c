@@ -3098,7 +3098,7 @@ wiz_migrate_mons()
     if (mcount < 0 || mcount > (COLNO * ROWNO) || Is_botlevel(&u.uz))
         return 0;
     while (mcount > 0) {
-        if (Is_stronghold(&u.uz))
+        if (uz_is_stronghold())
             assign_level(&tolevel, &valley_level);
         else
             get_level(&tolevel, uz_depth() + 1);
