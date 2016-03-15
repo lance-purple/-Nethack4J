@@ -1213,7 +1213,7 @@ boolean at_stairs, falling, portal;
             remdun_mapseen(l_idx);
     }
 
-    if (Is_rogue_level(newlevel) || is_uz_rogue_level())
+    if (Is_rogue_level(newlevel) || uz_is_rogue_level())
         assign_graphics(Is_rogue_level(newlevel) ? ROGUESET : PRIMARY);
 #ifdef USE_TILES
     substitute_tiles(newlevel);
@@ -1478,7 +1478,7 @@ boolean at_stairs, falling, portal;
             }
         }
     } else {
-        if (new && is_uz_rogue_level())
+        if (new && uz_is_rogue_level())
             You("enter what seems to be an older, more primitive world.");
         /* main dungeon message from your quest leader */
         if (!In_quest(&u.uz0) && at_dgn_entrance("The Quest")

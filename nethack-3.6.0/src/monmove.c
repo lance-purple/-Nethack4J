@@ -744,7 +744,7 @@ register int after;
     /* Not necessary if m_move called from this file, but necessary in
      * other calls of m_move (ex. leprechauns dodging)
      */
-    if (!is_uz_rogue_level())
+    if (!uz_is_rogue_level())
         can_tunnel = tunnels(ptr);
     can_open = !(nohands(ptr) || verysmall(ptr));
     can_unlock =
@@ -869,7 +869,7 @@ not_special:
         }
     }
 
-    if ((!mtmp->mpeaceful || !rn2(10)) && (!is_uz_rogue_level())) {
+    if ((!mtmp->mpeaceful || !rn2(10)) && (!uz_is_rogue_level())) {
         boolean in_line = (lined_up(mtmp)
                && (distmin(mtmp->mx, mtmp->my, mtmp->mux, mtmp->muy)
                    <= (throws_rocks(youmonst.data) ? 20 : ACURRSTR / 2 + 1)));

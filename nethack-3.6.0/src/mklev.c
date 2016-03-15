@@ -414,7 +414,7 @@ int type;
 
         /* also done in roguecorr(); doing it here first prevents
            making mimics in place of trapped doors on rogue level */
-        if (is_uz_rogue_level())
+        if (uz_is_rogue_level())
             levl[x][y].doormask = D_NODOOR;
 
         if (levl[x][y].doormask & D_TRAPPED) {
@@ -659,7 +659,7 @@ makelevel()
         register s_level *slev = Is_special(&u.uz);
 
         /* check for special levels */
-        if (slev && !is_uz_rogue_level()) {
+        if (slev && !uz_is_rogue_level()) {
             makemaz(slev->proto);
             return;
         } else if (dungeons[u.uz.dnum].proto[0]) {
@@ -690,7 +690,7 @@ makelevel()
 
     /* otherwise, fall through - it's a "regular" level. */
 
-    if (is_uz_rogue_level()) {
+    if (uz_is_rogue_level()) {
         makeroguerooms();
         makerogueghost();
     } else
@@ -720,7 +720,7 @@ makelevel()
     branchp = Is_branchlev(&u.uz);    /* possible dungeon branch */
     room_threshold = branchp ? 4 : 3; /* minimum number of rooms needed
                                          to allow a random special room */
-    if (is_uz_rogue_level())
+    if (uz_is_rogue_level())
         goto skip0;
     makecorridors();
     make_niches();
@@ -816,7 +816,7 @@ skip0:
             mktrap(0, 0, croom, (coord *) 0);
         if (!rn2(3))
             (void) mkgold(0L, somex(croom), somey(croom));
-        if (is_uz_rogue_level())
+        if (uz_is_rogue_level())
             goto skip_nonrogue;
         if (!rn2(10))
             mkfount(0, croom);
@@ -906,7 +906,7 @@ boolean skip_lvl_checks;
     /* determine if it is even allowed;
        almost all special levels are excluded */
     if (!skip_lvl_checks
-        && (In_hell(&u.uz) || In_V_tower(&u.uz) || is_uz_rogue_level()
+        && (In_hell(&u.uz) || In_V_tower(&u.uz) || uz_is_rogue_level()
             || level.flags.arboreal
             || ((sp = Is_special(&u.uz)) != 0 && !Is_oracle_level(&u.uz)
                 && (!In_mines(&u.uz) || sp->flags.town))))
@@ -1034,7 +1034,7 @@ struct mkroom *croom;
     if ((int) levl[lowx][lowy].roomno == roomno || croom->irregular)
         return;
 #ifdef SPECIALIZATION
-    if (is_uz_rogue_level())
+    if (uz_is_rogue_level())
         do_ordinary = TRUE; /* vision routine helper */
     if ((rtype != OROOM) || do_ordinary)
 #endif
@@ -1261,7 +1261,7 @@ coord *tm;
 
     if (num > 0 && num < TRAPNUM) {
         kind = num;
-    } else if (is_uz_rogue_level()) {
+    } else if (uz_is_rogue_level()) {
         switch (rn2(7)) {
         default:
             kind = BEAR_TRAP;

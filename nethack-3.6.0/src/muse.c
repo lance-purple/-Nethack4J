@@ -1172,7 +1172,7 @@ struct monst *mtmp;
                 || !rn2(10))
             && dist2(mtmp->mx, mtmp->my, mtmp->mux, mtmp->muy) <= 2
             && mtmp->mcansee && haseyes(mtmp->data)
-            && !is_uz_rogue_level()
+            && !uz_is_rogue_level()
             && (!uz_in_endgame() || uz_is_earthlevel())) {
             m.offensive = obj;
             m.has_offense = MUSE_SCR_EARTH;

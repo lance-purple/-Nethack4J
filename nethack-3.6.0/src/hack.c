@@ -2522,7 +2522,7 @@ int x, y;
         return FALSE;
     /* all rogue level doors are doorless but disallow diagonal access, so
        we treat them as if their non-existant doors were actually present */
-    if (is_uz_rogue_level())
+    if (uz_is_rogue_level())
         return FALSE;
     return !(lev_p->doormask & ~(D_NODOOR | D_BROKEN));
 }

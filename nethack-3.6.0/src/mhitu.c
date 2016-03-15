@@ -673,7 +673,7 @@ register struct monst *mtmp;
             break;
         case AT_WEAP:
             if (range2) {
-                if (!is_uz_rogue_level())
+                if (!uz_is_rogue_level())
                     thrwmu(mtmp);
             } else {
                 int hittmp = 0;

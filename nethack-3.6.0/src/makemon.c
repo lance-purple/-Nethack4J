@@ -170,7 +170,7 @@ register struct monst *mtmp;
     struct obj *otmp;
     int bias, spe2, w1, w2;
 
-    if (is_uz_rogue_level())
+    if (uz_is_rogue_level())
         return;
     /*
      *  First a few special cases:
@@ -531,7 +531,7 @@ register struct monst *mtmp;
     register struct obj *otmp;
     register struct permonst *ptr = mtmp->data;
 
-    if (is_uz_rogue_level())
+    if (uz_is_rogue_level())
         return;
     /*
      *  Soldiers get armour & rations - armour approximates their ac.
@@ -1450,7 +1450,7 @@ rndmonst()
         minmlev = zlevel / 6;
         /* determine the level of the strongest monster to make. */
         maxmlev = (zlevel + u.ulevel) / 2;
-        upper = is_uz_rogue_level();
+        upper = uz_is_rogue_level();
         elemlevel = uz_in_endgame() && !uz_is_astralevel();
 
         /*
@@ -2021,9 +2021,9 @@ register struct monst *mtmp;
                         || levl[mx - 1][my].typ == TDWALL
                         || levl[mx - 1][my].typ == CROSSWALL
                         || levl[mx - 1][my].typ == TUWALL))
-            appear = is_uz_rogue_level() ? S_hwall : S_hcdoor;
+            appear = uz_is_rogue_level() ? S_hwall : S_hcdoor;
         else
-            appear = is_uz_rogue_level() ? S_vwall : S_vcdoor;
+            appear = uz_is_rogue_level() ? S_vwall : S_vcdoor;
         if (!mtmp->minvis || See_invisible)
             block_point(mx, my); /* vision */
     } else if (level.flags.is_maze_lev && !In_sokoban(&u.uz) && rn2(2)) {
