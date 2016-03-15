@@ -1285,7 +1285,7 @@ coord *tm;
             kind = RUST_TRAP;
             break;
         }
-    } else if (Inhell && !rn2(5)) {
+    } else if (uz_in_hell() && !rn2(5)) {
         /* bias the frequency of fire traps in Gehennom */
         kind = FIRE_TRAP;
     } else {
@@ -1326,7 +1326,7 @@ coord *tm;
                     kind = NO_TRAP;
                 break;
             case FIRE_TRAP:
-                if (!Inhell)
+                if (!uz_in_hell())
                     kind = NO_TRAP;
                 break;
             case TELEP_TRAP:

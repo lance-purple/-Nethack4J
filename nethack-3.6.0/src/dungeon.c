@@ -1099,6 +1099,12 @@ d_level *lev1, *lev2;
                       && lev1->dlevel == lev2->dlevel);
 }
 
+boolean uz_on_level(d_level* lev)
+{
+    return (boolean) (u.uz.dnum == lev->dnum
+                      && u.uz.dlevel == lev->dlevel);
+}
+
 /* is this level referenced in the special level chain? */
 s_level *
 Is_special(lev)
@@ -1495,6 +1501,11 @@ In_hell(lev)
 d_level *lev;
 {
     return (boolean) (dungeons[lev->dnum].flags.hellish);
+}
+
+boolean uz_in_hell()
+{
+    return (boolean) (dungeons[u.uz.dnum].flags.hellish);
 }
 
 /* sets *lev to be the gateway to Gehennom... */

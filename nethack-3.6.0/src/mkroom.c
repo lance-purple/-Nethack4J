@@ -437,7 +437,7 @@ morguemon()
     register int i = rn2(100), hd = rn2(level_difficulty());
 
     if (hd > 10 && i < 10) {
-        if (Inhell || uz_in_endgame()) {
+        if (uz_in_hell() || uz_in_endgame()) {
             return mkclass(S_DEMON, 0);
         } else {
             int ndemon_res = ndemon(A_NONE);

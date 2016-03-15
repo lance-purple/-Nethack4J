@@ -205,7 +205,7 @@ boolean talk;
     }
 }
 
-#define Athome (Inhell && (mtmp->cham == NON_PM))
+#define Athome (uz_in_hell() && (mtmp->cham == NON_PM))
 
 /* returns 1 if it won't attack. */
 int

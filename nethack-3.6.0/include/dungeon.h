@@ -95,11 +95,11 @@ typedef struct branch {
  *
  * Depth corresponds to the number of floors below the surface.
  */
-#define uz_is_astralevel() (on_level(&u.uz, &astral_level))
-#define uz_is_earthlevel() (on_level(&u.uz, &earth_level))
-#define uz_is_waterlevel() (on_level(&u.uz, &water_level))
-#define uz_is_firelevel() (on_level(&u.uz, &fire_level))
-#define uz_is_airlevel() (on_level(&u.uz, &air_level))
+#define uz_is_astralevel() (uz_on_level(&astral_level))
+#define uz_is_earthlevel() (uz_on_level(&earth_level))
+#define uz_is_waterlevel() (uz_on_level(&water_level))
+#define uz_is_firelevel() (uz_on_level(&fire_level))
+#define uz_is_airlevel() (uz_on_level(&air_level))
 #define Is_medusa_level(x) (on_level(x, &medusa_level))
 #define Is_oracle_level(x) (on_level(x, &oracle_level))
 #define Is_valley(x) (on_level(x, &valley_level))
@@ -112,9 +112,9 @@ typedef struct branch {
 #define Is_sanctum(x) (on_level(x, &sanctum_level))
 #define Is_portal_level(x) (on_level(x, &portal_level))
 #define Is_rogue_level(x) (on_level(x, &rogue_level))
-#define uz_is_rogue_level() (on_level(&u.uz, &rogue_level))
+#define uz_is_rogue_level() (uz_on_level(&rogue_level))
 #define Is_stronghold(x) (on_level(x, &stronghold_level))
-#define uz_is_stronghold() (on_level(&u.uz, &stronghold_level))
+#define uz_is_stronghold() (uz_on_level(&stronghold_level))
 #define Is_bigroom(x) (on_level(x, &bigroom_level))
 #define Is_qstart(x) (on_level(x, &qstart_level))
 #define Is_qlocate(x) (on_level(x, &qlocate_level))
@@ -124,7 +124,6 @@ typedef struct branch {
 #define Is_sokoend_level(x) (on_level(x, &sokoend_level))
 
 #define In_sokoban(x) ((x)->dnum == sokoban_dnum)
-#define Inhell In_hell(&u.uz) /* now gehennom */
 #define In_endgame(x) ((x)->dnum == astral_level.dnum)
 #define uz_in_endgame() (u.uz.dnum == astral_level.dnum)
 

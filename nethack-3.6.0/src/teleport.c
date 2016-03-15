@@ -791,7 +791,7 @@ level_tele()
         /* if invocation did not yet occur, teleporting into
          * the last level of Gehennom is forbidden.
          */
-        if (!wizard && Inhell && !u.uevent.invoked
+        if (!wizard && uz_in_hell() && !u.uevent.invoked
             && newlev >= (dungeons[u.uz.dnum].depth_start
                           + dunlevs_in_dungeon(&u.uz) - 1)) {
             newlev = dungeons[u.uz.dnum].depth_start
@@ -1290,7 +1290,7 @@ random_teleport_level()
         max_depth =
             dunlevs_in_dungeon(&u.uz) + (dungeons[u.uz.dnum].depth_start - 1);
         /* can't reach Sanctum if the invocation hasn't been performed */
-        if (Inhell && !u.uevent.invoked)
+        if (uz_in_hell() && !u.uevent.invoked)
             max_depth -= 1;
     }
 
