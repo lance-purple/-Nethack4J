@@ -912,7 +912,7 @@ dodown()
             dotrap(trap, TOOKPLUNGE);
             return 1;
         } else if (!trap || (trap->ttyp != TRAPDOOR && trap->ttyp != HOLE)
-                   || !Can_fall_thru(&u.uz) || !trap->tseen) {
+                   || !uz_can_fall_thru() || !trap->tseen) {
             if (flags.autodig && !context.nopick && uwep && is_pick(uwep)) {
                 return use_pick_axe2(uwep);
             } else {
@@ -1213,7 +1213,7 @@ boolean at_stairs, falling, portal;
             remdun_mapseen(l_idx);
     }
 
-    if (Is_rogue_level(newlevel) || Is_rogue_level(&u.uz))
+    if (Is_rogue_level(newlevel) || is_uz_rogue_level())
         assign_graphics(Is_rogue_level(newlevel) ? ROGUESET : PRIMARY);
 #ifdef USE_TILES
     substitute_tiles(newlevel);
@@ -1478,7 +1478,7 @@ boolean at_stairs, falling, portal;
             }
         }
     } else {
-        if (new && Is_rogue_level(&u.uz))
+        if (new && is_uz_rogue_level())
             You("enter what seems to be an older, more primitive world.");
         /* main dungeon message from your quest leader */
         if (!In_quest(&u.uz0) && at_dgn_entrance("The Quest")

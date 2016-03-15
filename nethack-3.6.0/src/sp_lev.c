@@ -777,7 +777,7 @@ rndtrap()
             rtrap = NO_TRAP;
             break;
         case TRAPDOOR:
-            if (!Can_dig_down(&u.uz))
+            if (!uz_can_dig_down())
                 rtrap = NO_TRAP;
             break;
         case LEVEL_TELEP:
@@ -4316,7 +4316,7 @@ struct opvar *ov;
     }
 
     /* try to make a hole or a trapdoor */
-    if (Can_fall_thru(&u.uz)) {
+    if (uz_can_fall_thru()) {
         opvar_free(ov3);
         ov3 = opvar_clone(ov2);
         while (selection_rndcoord(ov3, &x, &y, TRUE)) {

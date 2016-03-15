@@ -1570,7 +1570,7 @@ struct obj *sobj; /* scroll, or fake spellbook object for scroll-like spell */
         break;
     case SCR_EARTH:
         /* TODO: handle steeds */
-        if (!Is_rogue_level(&u.uz) && uz_has_ceiling()
+        if (!is_uz_rogue_level() && uz_has_ceiling()
             && (!uz_in_endgame() || uz_is_earthlevel())) {
             register int x, y;
             int nboulders = 0;
@@ -1890,7 +1890,7 @@ struct obj *obj;
     if (Punished && !on && !Blind)
         move_bc(1, 0, uball->ox, uball->oy, uchain->ox, uchain->oy);
 
-    if (Is_rogue_level(&u.uz)) {
+    if (is_uz_rogue_level()) {
         /* Can't use do_clear_area because MAX_RADIUS is too small */
         /* rogue lighting must light the entire room */
         int rnum = levl[u.ux][u.uy].roomno - ROOMOFFSET;

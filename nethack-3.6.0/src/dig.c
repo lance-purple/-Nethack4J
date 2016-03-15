@@ -216,7 +216,7 @@ int x, y;
                || (ttmp
                    && (ttmp->ttyp == MAGIC_PORTAL
                        || ttmp->ttyp == VIBRATING_SQUARE
-                       || (!Can_dig_down(&u.uz) && !levl[x][y].candig)))) {
+                       || (!uz_can_dig_down() && !levl[x][y].candig)))) {
         if (verbose)
             pline_The("%s here is too hard to %s.", surface(x, y), verb);
         return FALSE;
@@ -577,7 +577,7 @@ int ttyp;
         return;
     }
 
-    if (ttyp != PIT && (!Can_dig_down(&u.uz) && !lev->candig)) {
+    if (ttyp != PIT && (!uz_can_dig_down() && !lev->candig)) {
         impossible("digactualhole: can't dig %s on this level.",
                    defsyms[trap_to_defsym(ttyp)].explanation);
         ttyp = PIT;
@@ -769,7 +769,7 @@ coord *cc;
 
     ttmp = t_at(dig_x, dig_y);
     lev = &levl[dig_x][dig_y];
-    nohole = (!Can_dig_down(&u.uz) && !lev->candig);
+    nohole = (!uz_can_dig_down() && !lev->candig);
 
     if ((ttmp && (ttmp->ttyp == MAGIC_PORTAL
                   || ttmp->ttyp == VIBRATING_SQUARE || nohole))

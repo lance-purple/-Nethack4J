@@ -439,7 +439,7 @@ struct monst *mtmp;
             if ((t->ttyp == TRAPDOOR || t->ttyp == HOLE)
                 && !is_floater(mtmp->data)
                 && !mtmp->isshk && !mtmp->isgd && !mtmp->ispriest
-                && Can_fall_thru(&u.uz)) {
+                && uz_can_fall_thru()) {
                 trapx = xx;
                 trapy = yy;
                 m.has_defense = MUSE_TRAPDOOR;
@@ -729,7 +729,7 @@ struct monst *mtmp;
             pline_The("digging ray is ineffective.");
             return 2;
         }
-        if (!Can_dig_down(&u.uz) && !levl[mtmp->mx][mtmp->my].candig) {
+        if (!uz_can_dig_down() && !levl[mtmp->mx][mtmp->my].candig) {
             if (canseemon(mtmp))
                 pline_The("%s here is too hard to dig in.",
                           surface(mtmp->mx, mtmp->my));
@@ -1172,7 +1172,7 @@ struct monst *mtmp;
                 || !rn2(10))
             && dist2(mtmp->mx, mtmp->my, mtmp->mux, mtmp->muy) <= 2
             && mtmp->mcansee && haseyes(mtmp->data)
-            && !Is_rogue_level(&u.uz)
+            && !is_uz_rogue_level()
             && (!uz_in_endgame() || uz_is_earthlevel())) {
             m.offensive = obj;
             m.has_offense = MUSE_SCR_EARTH;

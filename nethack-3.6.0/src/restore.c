@@ -859,7 +859,7 @@ register int fd;
 
     if (!wizard && !discover)
         (void) delete_savefile();
-    if (Is_rogue_level(&u.uz))
+    if (is_uz_rogue_level())
         assign_graphics(ROGUESET);
 #ifdef USE_TILES
     substitute_tiles(&u.uz);

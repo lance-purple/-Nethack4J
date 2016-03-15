@@ -1282,12 +1282,11 @@ d_level *lev;
 }
 
 boolean
-Can_dig_down(lev)
-d_level *lev;
+uz_can_dig_down()
 {
     return (boolean) (!level.flags.hardfloor
-                      && !Is_botlevel(lev)
-                      && !Invocation_lev(lev));
+                      && !Is_botlevel(&u.uz)
+                      && !Invocation_lev(&u.uz));
 }
 
 /*
@@ -1296,10 +1295,9 @@ d_level *lev;
  * both digging and falling.
  */
 boolean
-Can_fall_thru(lev)
-d_level *lev;
+uz_can_fall_thru()
 {
-    return (boolean) (Can_dig_down(lev) || Is_stronghold(lev));
+    return (boolean) (uz_can_dig_down() || uz_is_stronghold());
 }
 
 /*
@@ -2277,7 +2275,7 @@ recalc_mapseen()
         mptr->flags.bigroom = Is_bigroom(&u.uz);
     else if (mptr->flags.forgot)
         mptr->flags.bigroom = 0;
-    mptr->flags.roguelevel = Is_rogue_level(&u.uz);
+    mptr->flags.roguelevel = is_uz_rogue_level();
     mptr->flags.oracle = 0; /* recalculated during room traversal below */
     mptr->flags.castletune = 0;
     /* flags.castle, flags.valley, flags.msanctum retain previous value */
