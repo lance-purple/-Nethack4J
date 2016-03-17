@@ -1692,7 +1692,7 @@ xchar x, y;
 
     gate_str = 0;
     /* this matches the player restriction in goto_level() */
-    if (on_level(&u.uz, &qstart_level) && !ok_to_quest())
+    if (uz_on_level(&qstart_level) && !ok_to_quest())
         return MIGR_NOWHERE;
 
     if ((xdnstair == x && ydnstair == y)

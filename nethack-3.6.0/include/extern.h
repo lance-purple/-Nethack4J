@@ -555,6 +555,7 @@ E xchar FDECL(ledger_to_dlev, (XCHAR_P));
 E xchar FDECL(deepest_lev_reached, (BOOLEAN_P));
 E boolean FDECL(on_level, (d_level *, d_level *));
 E boolean FDECL(uz_on_level, (d_level *));
+E boolean NDECL(uz_on_level_uz0);
 E void FDECL(next_level, (BOOLEAN_P));
 E void FDECL(prev_level, (BOOLEAN_P));
 E void FDECL(u_on_newpos, (int, int));

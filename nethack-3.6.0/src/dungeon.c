@@ -1105,6 +1105,13 @@ boolean uz_on_level(d_level* lev)
                       && u.uz.dlevel == lev->dlevel);
 }
 
+boolean uz_on_level_uz0()
+{
+    return (boolean) (u.uz.dnum == u.uz0.dnum
+                      && u.uz.dlevel == u.uz0.dlevel);
+}
+
+
 /* is this level referenced in the special level chain? */
 s_level *
 Is_special(lev)
@@ -1204,7 +1211,7 @@ int x, y;
         u.usteed->mx = u.ux, u.usteed->my = u.uy;
     /* when changing levels, don't leave old position set with
        stale values from previous level */
-    if (!on_level(&u.uz, &u.uz0))
+    if (!uz_on_level_uz0())
         u.ux0 = u.ux, u.uy0 = u.uy;
 }
 
@@ -1453,7 +1460,7 @@ const char *s;
     branch *br;
 
     br = dungeon_branch(s);
-    return on_level(&u.uz, &br->end1) ? TRUE : FALSE;
+    return uz_on_level(&br->end1) ? TRUE : FALSE;
 }
 
 /* is `lev' part of Vlad's tower? */
@@ -2209,7 +2216,7 @@ STATIC_OVL boolean
 interest_mapseen(mptr)
 mapseen *mptr;
 {
-    if (on_level(&u.uz, &mptr->lev))
+    if (uz_on_level(&mptr->lev))
         return TRUE;
     if (mptr->flags.unreachable || mptr->flags.forgot)
         return FALSE;
@@ -2297,7 +2304,7 @@ recalc_mapseen()
                                  && !(u.uevent.qcompleted
                                       || u.uevent.qexpelled
                                       || quest_status.leader_is_dead));
-    mptr->flags.questing = (on_level(&u.uz, &qstart_level)
+    mptr->flags.questing = (uz_on_level(&qstart_level)
                             && quest_status.got_quest);
 
     /* track rooms the hero is in */
@@ -2742,7 +2749,7 @@ boolean printdun;
 {
     char buf[BUFSZ], tmpbuf[BUFSZ];
     int i, depthstart, dnum;
-    boolean died_here = (final == 2 && on_level(&u.uz, &mptr->lev));
+    boolean died_here = (final == 2 && uz_on_level(&mptr->lev));
 
     /* Damnable special cases */
     /* The quest and knox should appear to be level 1 to match
@@ -2792,7 +2799,7 @@ boolean printdun;
     /* [perhaps print custom annotation on its own line when it's long] */
     if (mptr->custom)
         Sprintf(eos(buf), " (%s)", mptr->custom);
-    if (on_level(&u.uz, &mptr->lev))
+    if (uz_on_level(&mptr->lev))
         Sprintf(eos(buf), " <- You %s here.",
                 (!final || (final == 1 && how == ASCENDED)) ? "are" : "were");
     putstr(win, !final ? ATR_BOLD : 0, buf);

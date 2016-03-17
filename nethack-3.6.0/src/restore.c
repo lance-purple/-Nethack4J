@@ -1116,7 +1116,7 @@ boolean ghostly;
         if (br && u.uz.dlevel == 1) {
             d_level ltmp;
 
-            if (on_level(&u.uz, &br->end1))
+            if (uz_on_level(&br->end1))
                 assign_level(&ltmp, &br->end2);
             else
                 assign_level(&ltmp, &br->end1);
