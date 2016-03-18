@@ -48,7 +48,7 @@ boolean forceshow;
     struct trap *trap;
     struct rm *lev;
 
-    if (!on_level(&egrd->gdlevel, &u.uz))
+    if (!uz_on_level(&egrd->gdlevel))
         return TRUE;
 
     while ((fcbeg = egrd->fcbeg) < egrd->fcend) {
@@ -185,7 +185,7 @@ findgd()
     for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
         if (DEADMONSTER(mtmp))
             continue;
-        if (mtmp->isgd && on_level(&(EGD(mtmp)->gdlevel), &u.uz))
+        if (mtmp->isgd && uz_on_level(&(EGD(mtmp)->gdlevel)))
             return mtmp;
     }
     return (struct monst *) 0;
@@ -552,7 +552,7 @@ register struct monst *grd;
     register boolean u_carry_gold = ((umoney + hidden_gold()) > 0L);
     boolean see_guard, newspot = FALSE;
 
-    if (!on_level(&(egrd->gdlevel), &u.uz))
+    if (!uz_on_level(&(egrd->gdlevel)))
         return -1;
     nx = ny = m = n = 0;
     if (!u_in_vault && !grd_in_vault)

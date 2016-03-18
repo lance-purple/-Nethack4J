@@ -1762,7 +1762,7 @@ struct monst *mtmp;
 
                 get_level(&tolevel, tolev);
                 /* insurance against future changes... */
-                if (on_level(&tolevel, &u.uz))
+                if (uz_on_level(&tolevel))
                     goto skipmsg;
                 if (vismon) {
                     pline("%s rises up, through the %s!", Monnam(mtmp),

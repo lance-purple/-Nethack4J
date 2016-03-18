@@ -152,7 +152,7 @@ register xchar x, y;
 {
     return (boolean) (priest && priest->ispriest
                       && (EPRI(priest)->shroom == *in_rooms(x, y, TEMPLE))
-                      && on_level(&(EPRI(priest)->shrlevel), &u.uz));
+                      && uz_on_level(&(EPRI(priest)->shrlevel)));
 }
 
 boolean
@@ -247,7 +247,7 @@ boolean sanctum; /* is it the seat of the high priest? */
 
         /* now his/her goodies... */
         if (sanctum && EPRI(priest)->shralign == A_NONE
-            && on_level(&sanctum_level, &u.uz)) {
+            && uz_on_level(&sanctum_level)) {
             (void) mongets(priest, AMULET_OF_YENDOR);
         }
         /* 2 to 4 spellbooks */
@@ -834,7 +834,7 @@ clearpriests()
     for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
         if (DEADMONSTER(mtmp))
             continue;
-        if (mtmp->ispriest && !on_level(&(EPRI(mtmp)->shrlevel), &u.uz))
+        if (mtmp->ispriest && !uz_on_level(&(EPRI(mtmp)->shrlevel)))
             mongone(mtmp);
     }
 }

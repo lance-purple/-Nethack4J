@@ -928,7 +928,7 @@ dodown()
                                              : "engulfed");
         return 1;
     }
-    if (on_level(&valley_level, &u.uz) && !u.uevent.gehennom_entered) {
+    if (uz_on_level(&valley_level) && !u.uevent.gehennom_entered) {
         You("are standing at the gate to Gehennom.");
         pline("Unspeakable cruelty and harm lurk down there.");
         if (yn("Are you sure you want to enter?") != 'y')
@@ -1139,7 +1139,7 @@ boolean at_stairs, falling, portal;
             new_ledger = ledger_no(newlevel);
 
             pline("A mysterious force momentarily surrounds you...");
-            if (on_level(newlevel, &u.uz)) {
+            if (uz_on_level(newlevel)) {
                 (void) safe_teleds(FALSE);
                 (void) next_to_u();
                 return;
@@ -1156,7 +1156,7 @@ boolean at_stairs, falling, portal;
         return;
     }
 
-    if (on_level(newlevel, &u.uz))
+    if (uz_on_level(newlevel))
         return; /* this can happen */
 
     /* tethered movement makes level change while trapped feasible */

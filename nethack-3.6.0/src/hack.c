@@ -368,7 +368,7 @@ xchar x, y;
         nomul(0);
         return 1;
     } else if (context.digging.pos.x != x || context.digging.pos.y != y
-               || !on_level(&context.digging.level, &u.uz)) {
+               || !uz_on_level(&context.digging.level)) {
         context.digging.down = FALSE;
         context.digging.chew = TRUE;
         context.digging.warned = FALSE;
