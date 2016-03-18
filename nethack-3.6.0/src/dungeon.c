@@ -1033,6 +1033,10 @@ d_level *lev;
     return (xchar) (lev->dlevel + dungeons[lev->dnum].ledger_start);
 }
 
+xchar uz_ledger_no() {
+    return (xchar) (u.uz.dlevel + dungeons[u.uz.dnum].ledger_start);
+}
+
 /*
  * The last level in the bookkeeping list of level is the bottom of the last
  * dungeon in the dungeons[] array.
