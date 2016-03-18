@@ -523,10 +523,10 @@ register const char *s;
         if (dunlevs_in_dungeon(&u.uz) > 1) {
             if (sp && sp->rndlevs)
                 Sprintf(protofile, "%s%d-%d", dungeons[u.uz.dnum].proto,
-                        dunlev(&u.uz), rnd((int) sp->rndlevs));
+                        uz_dunlev(), rnd((int) sp->rndlevs));
             else
                 Sprintf(protofile, "%s%d", dungeons[u.uz.dnum].proto,
-                        dunlev(&u.uz));
+                        uz_dunlev());
         } else if (sp && sp->rndlevs) {
             Sprintf(protofile, "%s-%d", dungeons[u.uz.dnum].proto,
                     rnd((int) sp->rndlevs));

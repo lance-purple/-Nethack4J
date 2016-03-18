@@ -550,6 +550,7 @@ E xchar NDECL(maxledgerno);
 E schar FDECL(depth, (d_level *));
 E schar NDECL(uz_depth);
 E xchar FDECL(dunlev, (d_level *));
+E xchar NDECL(uz_dunlev);
 E xchar FDECL(dunlevs_in_dungeon, (d_level *));
 E xchar FDECL(ledger_to_dnum, (XCHAR_P));
 E xchar FDECL(ledger_to_dlev, (XCHAR_P));

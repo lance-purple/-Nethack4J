@@ -857,7 +857,7 @@ struct monst *mtmp;
         }
         m_flee(mtmp);
         if (uz_in_hell() && mon_has_amulet(mtmp) && !rn2(4)
-            && (dunlev(&u.uz) < dunlevs_in_dungeon(&u.uz) - 3)) {
+            && (uz_dunlev() < dunlevs_in_dungeon(&u.uz) - 3)) {
             if (vismon)
                 pline(
     "As %s climbs the stairs, a mysterious force momentarily surrounds %s...",

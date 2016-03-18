@@ -979,6 +979,10 @@ d_level *lev;
     return lev->dlevel;
 }
 
+xchar uz_dunlev() {
+    return u.uz.dlevel;
+}
+
 /* return the lowest level number for *this* dungeon */
 xchar
 dunlevs_in_dungeon(lev)

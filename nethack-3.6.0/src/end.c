@@ -1240,7 +1240,7 @@ int how;
             Sprintf(pbuf, "You %s in %s", ends[how], where);
             if (!uz_in_endgame() && !Is_knox(&u.uz))
                 Sprintf(eos(pbuf), " on dungeon level %d",
-                        In_quest(&u.uz) ? dunlev(&u.uz) : uz_depth());
+                        In_quest(&u.uz) ? uz_dunlev() : uz_depth());
         }
 
         Sprintf(eos(pbuf), " with %ld point%s,", u.urexp, plur(u.urexp));

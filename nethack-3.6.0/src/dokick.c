@@ -1027,7 +1027,7 @@ dokick()
                 maploc->looted = T_LOOTED;
                 return 1;
             } else if (!rn2(4)) {
-                if (dunlev(&u.uz) < dunlevs_in_dungeon(&u.uz)) {
+                if (uz_dunlev() < dunlevs_in_dungeon(&u.uz)) {
                     fall_through(FALSE);
                     return 1;
                 } else

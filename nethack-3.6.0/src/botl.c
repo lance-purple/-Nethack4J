@@ -272,7 +272,7 @@ char *buf;
     if (Is_knox(&u.uz))
         Sprintf(buf, "%s ", dungeons[u.uz.dnum].dname);
     else if (In_quest(&u.uz))
-        Sprintf(buf, "Home %d ", dunlev(&u.uz));
+        Sprintf(buf, "Home %d ", uz_dunlev());
     else if (uz_in_endgame())
         Sprintf(buf, uz_is_astralevel() ? "Astral Plane " : "End Game ");
     else {

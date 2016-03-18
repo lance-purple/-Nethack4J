@@ -1122,7 +1122,7 @@ boolean at_stairs, falling, portal;
      *   -3    2.08   0.0    0.0
      */
     if (uz_in_hell() && up && u.uhave.amulet && !newdungeon && !portal
-        && (dunlev(&u.uz) < dunlevs_in_dungeon(&u.uz) - 3)) {
+        && (uz_dunlev() < dunlevs_in_dungeon(&u.uz) - 3)) {
         if (!rn2(4)) {
             int odds = 3 + (int) u.ualign.type,   /* 2..4 */
                 diff = odds <= 1 ? 0 : rn2(odds); /* paranoia */
@@ -1228,12 +1228,12 @@ boolean at_stairs, falling, portal;
     assign_level(&u.utolev, newlevel);
     u.utotype = 0;
     if (!builds_up(&u.uz)) { /* usual case */
-        if (dunlev(&u.uz) > dunlev_reached(&u.uz))
-            dunlev_reached(&u.uz) = dunlev(&u.uz);
+        if (uz_dunlev() > dunlev_reached(&u.uz))
+            dunlev_reached(&u.uz) = uz_dunlev();
     } else {
         if (dunlev_reached(&u.uz) == 0
-            || dunlev(&u.uz) < dunlev_reached(&u.uz))
-            dunlev_reached(&u.uz) = dunlev(&u.uz);
+            || uz_dunlev() < dunlev_reached(&u.uz))
+            dunlev_reached(&u.uz) = uz_dunlev();
     }
     reset_rndmonst(NON_PM); /* u.uz change affects monster generation */
 
