@@ -485,7 +485,7 @@ fixup_special()
         level.flags.graveyard = 1;
     } else if (uz_is_stronghold()) {
         level.flags.graveyard = 1;
-    } else if (Is_sanctum(&u.uz)) {
+    } else if (uz_is_sanctum()) {
         croom = search_special(TEMPLE);
 
         create_secret_door(croom, W_ANY);

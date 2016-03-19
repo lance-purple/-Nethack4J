@@ -2638,7 +2638,7 @@ char *buf;
     else if (IS_ALTAR(ltyp)) {
         Sprintf(altbuf, "%saltar to %s (%s)",
                 ((lev->altarmask & AM_SHRINE)
-                 && (uz_is_astralevel() || Is_sanctum(&u.uz)))
+                 && (uz_is_astralevel() || uz_is_sanctum()))
                     ? "high "
                     : "",
                 a_gname(),

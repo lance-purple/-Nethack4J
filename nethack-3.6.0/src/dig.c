@@ -199,7 +199,7 @@ int x, y;
         return FALSE;
     } else if (IS_ALTAR(levl[x][y].typ)
                && (madeby != BY_OBJECT || uz_is_astralevel()
-                   || Is_sanctum(&u.uz))) {
+                   || uz_is_sanctum())) {
         if (verbose)
             pline_The("altar is too hard to break apart.");
         return FALSE;

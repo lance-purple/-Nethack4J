@@ -226,7 +226,7 @@ dosounds()
         return;
     }
     if (level.flags.has_temple && !rn2(200)
-        && !(uz_is_astralevel() || Is_sanctum(&u.uz))) {
+        && !(uz_is_astralevel() || uz_is_sanctum())) {
         for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
             if (DEADMONSTER(mtmp))
                 continue;

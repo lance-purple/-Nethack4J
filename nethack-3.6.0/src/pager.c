@@ -329,7 +329,7 @@ char *buf, *monbuf;
                         : align_str(
                               Amask2align(levl[x][y].altarmask & ~AM_SHRINE)),
                     ((levl[x][y].altarmask & AM_SHRINE)
-                     && (uz_is_astralevel() || Is_sanctum(&u.uz)))
+                     && (uz_is_astralevel() || uz_is_sanctum()))
                         ? "high "
                         : "");
             break;

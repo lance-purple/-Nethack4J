@@ -2507,7 +2507,7 @@ struct monst *priest UNUSED; /* currently unused; might be useful someday */
 
     if (Is_valley(&u.uz))
         mptr->flags.valley = 1;
-    else if (Is_sanctum(&u.uz))
+    else if (uz_is_sanctum())
         mptr->flags.msanctum = 1;
 }
 

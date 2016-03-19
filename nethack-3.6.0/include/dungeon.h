@@ -109,7 +109,7 @@ typedef struct branch {
 #define Is_wiz1_level(x) (on_level(x, &wiz1_level))
 #define Is_wiz2_level(x) (on_level(x, &wiz2_level))
 #define Is_wiz3_level(x) (on_level(x, &wiz3_level))
-#define Is_sanctum(x) (on_level(x, &sanctum_level))
+#define uz_is_sanctum(x) (uz_on_level(&sanctum_level))
 #define Is_portal_level(x) (on_level(x, &portal_level))
 #define Is_rogue_level(x) (on_level(x, &rogue_level))
 #define uz_is_rogue_level() (uz_on_level(&rogue_level))
