@@ -62,6 +62,7 @@ STATIC_DCL void FDECL(print_branch, (winid, int, int, int, BOOLEAN_P,
 STATIC_DCL mapseen *FDECL(load_mapseen, (int));
 STATIC_DCL void FDECL(save_mapseen, (int, mapseen *));
 STATIC_DCL mapseen *FDECL(find_mapseen, (d_level *));
+STATIC_DCL mapseen *NDECL(uz_find_mapseen);
 STATIC_DCL void FDECL(print_mapseen, (winid, mapseen *, int, int, BOOLEAN_P));
 STATIC_DCL boolean FDECL(interest_mapseen, (mapseen *));
 STATIC_DCL void FDECL(traverse_mapseenchn, (BOOLEAN_P, winid,
@@ -1360,18 +1361,17 @@ uz_can_fall_thru()
  * Checks for amulets and such must be done elsewhere.
  */
 boolean
-Can_rise_up(x, y, lev)
+uz_can_rise_up(x, y)
 int x, y;
-d_level *lev;
 {
     /* can't rise up from inside the top of the Wizard's tower */
     /* KMH -- or in sokoban */
-    if (In_endgame(lev) || In_sokoban(lev)
-        || (Is_wiz1_level(lev) && In_W_tower(x, y, lev)))
+    if (In_endgame(&u.uz) || In_sokoban(&u.uz)
+        || (Is_wiz1_level(&u.uz) && uz_in_W_tower(x, y)))
         return FALSE;
-    return (boolean) (lev->dlevel > 1
-                      || (dungeons[lev->dnum].entry_lev == 1
-                          && ledger_no(lev) != 1
+    return (boolean) (u.uz.dlevel > 1
+                      || (dungeons[u.uz.dnum].entry_lev == 1
+                          && ledger_no(&u.uz) != 1
                           && sstairs.sx && sstairs.up));
 }
 
@@ -1528,11 +1528,10 @@ boolean uz_on_W_tower_level()
 
 /* is <x,y> of `lev' inside the Wizard's tower? */
 boolean
-In_W_tower(x, y, lev)
+uz_in_W_tower(x, y)
 int x, y;
-d_level *lev;
 {
-    if (!On_W_tower_level(lev))
+    if (!On_W_tower_level(&u.uz))
         return FALSE;
     /*
      * Both of the exclusion regions for arriving via level teleport
@@ -1587,6 +1586,13 @@ d_level *dest, *src;
 {
     dest->dnum = src->dnum;
     dest->dlevel = src->dlevel;
+}
+
+void assign_level_from_uz(dest)
+d_level *dest;
+{
+    dest->dnum = u.uz.dnum;
+    dest->dlevel = u.uz.dlevel;
 }
 
 /* dest = src + rn1(range) */
@@ -2055,7 +2061,7 @@ donamelevel()
     mapseen *mptr;
     char nbuf[BUFSZ]; /* Buffer for response */
 
-    if (!(mptr = find_mapseen(&u.uz)))
+    if (!(mptr = uz_find_mapseen()))
         return 0;
 
     if (mptr->custom) {
@@ -2092,6 +2098,18 @@ d_level *lev;
 
     for (mptr = mapseenchn; mptr; mptr = mptr->next)
         if (on_level(&(mptr->lev), lev))
+            break;
+
+    return mptr;
+}
+
+STATIC_OVL mapseen *
+uz_find_mapseen()
+{
+    mapseen *mptr;
+
+    for (mptr = mapseenchn; mptr; mptr = mptr->next)
+        if (uz_on_level(&(mptr->lev)))
             break;
 
     return mptr;
@@ -2309,7 +2327,7 @@ recalc_mapseen()
      * [Since quest expulsion no longer deletes quest mapseen data,
      * null return from find_mapseen() should now be impossible.]
      */
-    if (!(mptr = find_mapseen(&u.uz)))
+    if (!(mptr = uz_find_mapseen()))
         return;
 
     /* reset all features; mptr->feat.* = 0; */
@@ -2539,9 +2557,9 @@ void
 mapseen_temple(priest)
 struct monst *priest UNUSED; /* currently unused; might be useful someday */
 {
-    mapseen *mptr = find_mapseen(&u.uz);
+    mapseen *mptr = uz_find_mapseen();
 
-    if (Is_valley(&u.uz))
+    if (uz_is_valley())
         mptr->flags.valley = 1;
     else if (uz_is_sanctum())
         mptr->flags.msanctum = 1;
@@ -2552,7 +2570,7 @@ void
 room_discovered(roomno)
 int roomno;
 {
-    mapseen *mptr = find_mapseen(&u.uz);
+    mapseen *mptr = uz_find_mapseen();
 
     mptr->msrooms[roomno].seen = 1;
 }

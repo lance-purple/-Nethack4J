@@ -2677,7 +2677,7 @@ struct obj *obj; /* wand or spell */
             disclose = TRUE;
         } else if (striking && u.dz < 0 && rn2(3) && !uz_is_airlevel()
                    && !uz_is_waterlevel() && !Underwater
-                   && !Is_qstart(&u.uz)) {
+                   && !uz_is_qstart()) {
             int dmg;
             /* similar to zap_dig() */
             pline("A rock is dislodged from the %s and falls on your %s.",
@@ -2725,7 +2725,7 @@ struct obj *obj; /* wand or spell */
         break;
     case SPE_STONE_TO_FLESH:
         if (uz_is_airlevel() || uz_is_waterlevel() || Underwater
-            || (Is_qstart(&u.uz) && u.dz < 0)) {
+            || (uz_is_qstart() && u.dz < 0)) {
             pline1(nothing_happens);
         } else if (u.dz < 0) { /* we should do more... */
             pline("Blood drips on your %s.", body_part(FACE));

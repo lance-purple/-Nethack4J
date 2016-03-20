@@ -274,7 +274,7 @@ dosounds()
             return;
         }
     }
-    if (Is_oracle_level(&u.uz) && !rn2(400)) {
+    if (uz_is_oracle_level() && !rn2(400)) {
         /* make sure the Oracle is still here */
         for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
             if (DEADMONSTER(mtmp))

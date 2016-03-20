@@ -1128,7 +1128,7 @@ struct obj *obj;
                 context.digging.warned = FALSE;
                 context.digging.pos.x = rx;
                 context.digging.pos.y = ry;
-                assign_level(&context.digging.level, &u.uz);
+                assign_level_from_uz(&context.digging.level);
                 context.digging.effort = 0;
                 if (!context.digging.quiet)
                     You("start %s.", d_action[dig_target]);
@@ -1171,7 +1171,7 @@ struct obj *obj;
             context.digging.warned = FALSE;
             context.digging.pos.x = u.ux;
             context.digging.pos.y = u.uy;
-            assign_level(&context.digging.level, &u.uz);
+            assign_level_from_uz(&context.digging.level);
             context.digging.effort = 0;
             You("start %s downward.", verbing);
             if (*u.ushops)

@@ -1087,7 +1087,7 @@ boolean at_stairs, falling, portal;
     xchar new_ledger;
     boolean cant_go_back, up = (depth(newlevel) < uz_depth()),
                           newdungeon = (u.uz.dnum != newlevel->dnum),
-                          was_in_W_tower = In_W_tower(u.ux, u.uy, &u.uz),
+                          was_in_W_tower = uz_in_W_tower(u.ux, u.uy),
                           familiar = FALSE;
     boolean new = FALSE; /* made a new level? */
     struct monst *mtmp;
@@ -1134,7 +1134,7 @@ boolean at_stairs, falling, portal;
                     diff = 0;
             }
             if (diff == 0)
-                assign_level(newlevel, &u.uz);
+                assign_level_from_uz(newlevel);
 
             new_ledger = ledger_no(newlevel);
 
@@ -1223,7 +1223,7 @@ boolean at_stairs, falling, portal;
      */
     if ((at_stairs || falling || portal) && (u.uz.dnum != newlevel->dnum))
         recbranch_mapseen(&u.uz, newlevel);
-    assign_level(&u.uz0, &u.uz);
+    assign_level_from_uz(&u.uz0);
     assign_level(&u.uz, newlevel);
     assign_level(&u.utolev, newlevel);
     u.utotype = 0;
@@ -1413,7 +1413,7 @@ boolean at_stairs, falling, portal;
 
     /* Check whether we just entered Gehennom. */
     if (!In_hell(&u.uz0) && uz_in_hell()) {
-        if (Is_valley(&u.uz)) {
+        if (uz_is_valley()) {
             You("arrive at the Valley of the Dead...");
             pline_The("odor of burnt flesh and decay pervades the air.");
 #ifdef MICRO
@@ -1425,7 +1425,7 @@ boolean at_stairs, falling, portal;
         u.uachieve.enter_gehennom = 1;
     }
     /* in case we've managed to bypass the Valley's stairway down */
-    if (uz_in_hell() && !Is_valley(&u.uz))
+    if (uz_in_hell() && !uz_is_valley())
         u.uevent.gehennom_entered = 1;
 
     if (familiar) {
@@ -1493,7 +1493,7 @@ boolean at_stairs, falling, portal;
         }
     }
 
-    assign_level(&u.uz0, &u.uz); /* reset u.uz0 */
+    assign_level_from_uz(&u.uz0); /* reset u.uz0 */
 #ifdef INSURANCE
     save_currentstate();
 #endif

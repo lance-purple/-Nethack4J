@@ -253,7 +253,7 @@ struct monst *oracle;
        could push her onto a hole in the floor; at present, traps don't
        activate in such situation hence she won't fall to another level;
        however, that could change so be prepared to cope with such things */
-    if (!Is_oracle_level(&u.uz))
+    if (!uz_is_oracle_level())
         return FALSE;
 
     oracle->mpeaceful = 1;

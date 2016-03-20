@@ -82,7 +82,7 @@ onquest()
     if (!uz_is_special())
         return;
 
-    if (Is_qstart(&u.uz))
+    if (uz_is_qstart())
         on_start();
     else if (Is_qlocate(&u.uz))
         on_locate();

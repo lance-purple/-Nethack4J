@@ -908,7 +908,7 @@ register struct obj *otmp;
             unkn++;
             /* they went up a level */
             if ((uz_ledger_no() == 1 && u.uhave.amulet)
-                || Can_rise_up(u.ux, u.uy, &u.uz)) {
+                || uz_can_rise_up(u.ux, u.uy)) {
                 const char *riseup = "rise up, through the %s!";
 
                 if (uz_ledger_no() == 1) {

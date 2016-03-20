@@ -217,8 +217,7 @@ register struct monst *priest;
 
 /* exclusively for mktemple() */
 void
-priestini(lvl, sroom, sx, sy, sanctum)
-d_level *lvl;
+priestini(sroom, sx, sy, sanctum)
 struct mkroom *sroom;
 int sx, sy;
 boolean sanctum; /* is it the seat of the high priest? */
@@ -237,7 +236,7 @@ boolean sanctum; /* is it the seat of the high priest? */
         EPRI(priest)->shralign = Amask2align(levl[sx][sy].altarmask);
         EPRI(priest)->shrpos.x = sx;
         EPRI(priest)->shrpos.y = sy;
-        assign_level(&(EPRI(priest)->shrlevel), lvl);
+        assign_level_from_uz(&(EPRI(priest)->shrlevel));
         priest->mtrapseen = ~0; /* traps are known */
         priest->mpeaceful = 1;
         priest->ispriest = 1;
@@ -847,7 +846,7 @@ boolean ghostly;
 {
     if (u.uz.dlevel) {
         if (ghostly)
-            assign_level(&(EPRI(mtmp)->shrlevel), &u.uz);
+            assign_level_from_uz(&(EPRI(mtmp)->shrlevel));
     }
 }
 

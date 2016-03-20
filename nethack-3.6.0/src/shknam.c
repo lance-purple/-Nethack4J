@@ -658,7 +658,7 @@ struct mkroom *sroom;
     eshkp->shoproom = (schar) ((sroom - rooms) + ROOMOFFSET);
     sroom->resident = shk;
     eshkp->shoptype = sroom->rtype;
-    assign_level(&eshkp->shoplevel, &u.uz);
+    assign_level_from_uz(&eshkp->shoplevel);
     eshkp->shd = doors[sh];
     eshkp->shk.x = sx;
     eshkp->shk.y = sy;

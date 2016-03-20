@@ -598,7 +598,7 @@ unsigned int *stuckid, *steedid;
         return FALSE;
     }
     /* in case hangup save occurred in midst of level change */
-    assign_level(&u.uz0, &u.uz);
+    assign_level_from_uz(&u.uz0);
 
     /* this stuff comes after potential aborted restore attempts */
     restore_killers(fd);
