@@ -656,7 +656,7 @@ makelevel()
     clear_level_structures();
 
     {
-        register s_level *slev = Is_special(&u.uz);
+        register s_level *slev = uz_is_special();
 
         /* check for special levels */
         if (slev && !uz_is_rogue_level()) {
@@ -908,7 +908,7 @@ boolean skip_lvl_checks;
     if (!skip_lvl_checks
         && (In_hell(&u.uz) || In_V_tower(&u.uz) || uz_is_rogue_level()
             || level.flags.arboreal
-            || ((sp = Is_special(&u.uz)) != 0 && !Is_oracle_level(&u.uz)
+            || ((sp = uz_is_special()) != 0 && !Is_oracle_level(&u.uz)
                 && (!In_mines(&u.uz) || sp->flags.town))))
         return;
 
@@ -1385,7 +1385,7 @@ struct mkroom *croom;
      * has an up or down stair specified in its description file.
      */
     if ((uz_dunlev() == 1 && up)
-        || (uz_dunlev() == dunlevs_in_dungeon(&u.uz) && !up))
+        || (uz_dunlev() == dunlevs_in_uz_dungeon() && !up))
         return;
 
     if (up) {

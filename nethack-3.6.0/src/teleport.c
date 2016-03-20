@@ -678,7 +678,7 @@ level_tele()
         /* if in Knox and the requested level > 0, stay put.
          * we let negative values requests fall into the "heaven" loop.
          */
-        if (Is_knox(&u.uz) && newlev > 0 && !force_dest) {
+        if (uz_is_knox() && newlev > 0 && !force_dest) {
             You1(shudder_for_moment);
             return;
         }
@@ -709,7 +709,7 @@ level_tele()
         return;
     }
     if (uz_in_endgame()) { /* must already be wizard */
-        int llimit = dunlevs_in_dungeon(&u.uz);
+        int llimit = dunlevs_in_uz_dungeon();
 
         if (newlev >= 0 || newlev <= -llimit) {
             You_cant("get there from here.");
@@ -784,7 +784,7 @@ level_tele()
             surface but then actually arrive back inside the dungeon] */
     } else if (u.uz.dnum == medusa_level.dnum
                && newlev >= dungeons[u.uz.dnum].depth_start
-                                + dunlevs_in_dungeon(&u.uz)) {
+                                + dunlevs_in_uz_dungeon()) {
         if (!(wizard && force_dest))
             find_hell(&newlevel);
     } else {
@@ -793,9 +793,9 @@ level_tele()
          */
         if (!wizard && uz_in_hell() && !u.uevent.invoked
             && newlev >= (dungeons[u.uz.dnum].depth_start
-                          + dunlevs_in_dungeon(&u.uz) - 1)) {
+                          + dunlevs_in_uz_dungeon() - 1)) {
             newlev = dungeons[u.uz.dnum].depth_start
-                     + dunlevs_in_dungeon(&u.uz) - 2;
+                     + dunlevs_in_uz_dungeon() - 2;
             pline("Sorry...");
         }
         /* no teleporting out of quest dungeon */
@@ -1253,7 +1253,7 @@ random_teleport_level()
     int nlev, max_depth, min_depth, cur_depth = (int) uz_depth();
 
     /* [the endgame case can only occur in wizard mode] */
-    if (!rn2(5) || Is_knox(&u.uz) || uz_in_endgame())
+    if (!rn2(5) || uz_is_knox() || uz_in_endgame())
         return cur_depth;
 
     /* What I really want to do is as follows:
@@ -1276,7 +1276,7 @@ random_teleport_level()
      * Also prevent monsters reaching the Sanctum prior to invocation.
      */
     if (In_quest(&u.uz)) {
-        int bottom = dunlevs_in_dungeon(&u.uz),
+        int bottom = dunlevs_in_uz_dungeon(),
             qlocate_depth = qlocate_level.dlevel;
 
         /* if hero hasn't reached the middle locate level yet,
@@ -1288,7 +1288,7 @@ random_teleport_level()
     } else {
         min_depth = 1;
         max_depth =
-            dunlevs_in_dungeon(&u.uz) + (dungeons[u.uz.dnum].depth_start - 1);
+            dunlevs_in_uz_dungeon() + (dungeons[u.uz.dnum].depth_start - 1);
         /* can't reach Sanctum if the invocation hasn't been performed */
         if (uz_in_hell() && !u.uevent.invoked)
             max_depth -= 1;

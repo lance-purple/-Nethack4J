@@ -1238,7 +1238,7 @@ int how;
             if (uz_is_astralevel())
                 where = "The Astral Plane";
             Sprintf(pbuf, "You %s in %s", ends[how], where);
-            if (!uz_in_endgame() && !Is_knox(&u.uz))
+            if (!uz_in_endgame() && !uz_is_knox())
                 Sprintf(eos(pbuf), " on dungeon level %d",
                         In_quest(&u.uz) ? uz_dunlev() : uz_depth());
         }

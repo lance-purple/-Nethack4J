@@ -1392,7 +1392,7 @@ register struct permonst *ptr;
     register int alshift;
 
     if (oldmoves != moves) {
-        lev = Is_special(&u.uz);
+        lev = uz_is_special();
         oldmoves = moves;
     }
     switch ((lev) ? lev->flags.align : dungeons[u.uz.dnum].flags.align) {

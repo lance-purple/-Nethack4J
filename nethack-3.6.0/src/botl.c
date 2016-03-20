@@ -269,7 +269,7 @@ char *buf;
     int ret = 1;
 
     /* TODO:    Add in dungeon name */
-    if (Is_knox(&u.uz))
+    if (uz_is_knox())
         Sprintf(buf, "%s ", dungeons[u.uz.dnum].dname);
     else if (In_quest(&u.uz))
         Sprintf(buf, "Home %d ", uz_dunlev());

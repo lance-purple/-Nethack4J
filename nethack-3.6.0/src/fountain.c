@@ -476,7 +476,7 @@ register struct obj *obj;
         if (FOUNTAIN_IS_LOOTED(u.ux, u.uy))
             break;
         SET_FOUNTAIN_LOOTED(u.ux, u.uy);
-        (void) mkgold((long) (rnd((dunlevs_in_dungeon(&u.uz) - uz_dunlev()
+        (void) mkgold((long) (rnd((dunlevs_in_uz_dungeon() - uz_dunlev()
                                    + 1) * 2) + 5),
                       u.ux, u.uy);
         if (!Blind)

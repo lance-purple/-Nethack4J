@@ -895,7 +895,7 @@ wiz_map_levltyp(VOID_ARGS)
 
     {
         char dsc[BUFSZ];
-        s_level *slev = Is_special(&u.uz);
+        s_level *slev = uz_is_special();
 
         Sprintf(dsc, "D:%d,L:%d", u.uz.dnum, u.uz.dlevel);
         /* [dungeon branch features currently omitted] */
@@ -975,7 +975,7 @@ wiz_map_levltyp(VOID_ARGS)
             Strcat(dsc, " sokoban");
         else if (u.uz.dnum == quest_dnum)
             Strcat(dsc, " quest");
-        else if (Is_knox(&u.uz))
+        else if (uz_is_knox())
             Strcat(dsc, " ludios");
         else if (u.uz.dnum == 1)
             Strcat(dsc, " gehennom");

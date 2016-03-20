@@ -991,6 +991,11 @@ d_level *lev;
     return dungeons[lev->dnum].num_dunlevs;
 }
 
+xchar dunlevs_in_uz_dungeon()
+{
+    return dungeons[u.uz.dnum].num_dunlevs;
+}
+
 /* return the lowest level explored in the game*/
 xchar
 deepest_lev_reached(noquest)
@@ -1129,6 +1134,17 @@ d_level *lev;
 
     for (levtmp = sp_levchn; levtmp; levtmp = levtmp->next)
         if (on_level(lev, &levtmp->dlevel))
+            return levtmp;
+
+    return (s_level *) 0;
+}
+
+s_level* uz_is_special()
+{
+    s_level *levtmp;
+
+    for (levtmp = sp_levchn; levtmp; levtmp = levtmp->next)
+        if (uz_on_level(&levtmp->dlevel))
             return levtmp;
 
     return (s_level *) 0;
@@ -1571,7 +1587,7 @@ int
 induced_align(pct)
 int pct;
 {
-    s_level *lev = Is_special(&u.uz);
+    s_level *lev = uz_is_special();
     aligntyp al;
 
     if (lev && lev->flags.align)
@@ -2464,7 +2480,7 @@ recalc_mapseen()
             case DRAWBRIDGE_DOWN:
                 if (uz_is_stronghold())
                     mptr->flags.castle = 1, mptr->flags.castletune = 1;
-                else if (Is_knox(&u.uz))
+                else if (uz_is_knox())
                     mptr->flags.ludios = 1;
                 break;
             default:

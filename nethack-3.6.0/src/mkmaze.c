@@ -467,7 +467,7 @@ fixup_special()
         croom = search_special(MORGUE);
 
         create_secret_door(croom, W_SOUTH | W_EAST | W_WEST);
-    } else if (Is_knox(&u.uz)) {
+    } else if (uz_is_knox()) {
         /* using an unfilled morgue for rm id */
         croom = search_special(MORGUE);
         /* avoid inappropriate morgue-related messages */
@@ -511,7 +511,7 @@ register const char *s;
 {
     int x, y;
     char protofile[20];
-    s_level *sp = Is_special(&u.uz);
+    s_level *sp = uz_is_special();
     coord mm;
 
     if (*s) {
@@ -520,7 +520,7 @@ register const char *s;
         else
             Strcpy(protofile, s);
     } else if (*(dungeons[u.uz.dnum].proto)) {
-        if (dunlevs_in_dungeon(&u.uz) > 1) {
+        if (dunlevs_in_uz_dungeon() > 1) {
             if (sp && sp->rndlevs)
                 Sprintf(protofile, "%s%d-%d", dungeons[u.uz.dnum].proto,
                         uz_dunlev(), rnd((int) sp->rndlevs));

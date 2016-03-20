@@ -1399,7 +1399,7 @@ void
 dissolve_bars(x, y)
 register int x, y;
 {
-    levl[x][y].typ = (Is_special(&u.uz) || *in_rooms(x, y, 0)) ? ROOM : CORR;
+    levl[x][y].typ = (uz_is_special() || *in_rooms(x, y, 0)) ? ROOM : CORR;
     newsym(x, y);
 }
 

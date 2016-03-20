@@ -1122,7 +1122,7 @@ boolean at_stairs, falling, portal;
      *   -3    2.08   0.0    0.0
      */
     if (uz_in_hell() && up && u.uhave.amulet && !newdungeon && !portal
-        && (uz_dunlev() < dunlevs_in_dungeon(&u.uz) - 3)) {
+        && (uz_dunlev() < dunlevs_in_uz_dungeon() - 3)) {
         if (!rn2(4)) {
             int odds = 3 + (int) u.ualign.type,   /* 2..4 */
                 diff = odds <= 1 ? 0 : rn2(odds); /* paranoia */
@@ -1466,7 +1466,7 @@ boolean at_stairs, falling, portal;
     } else if (In_V_tower(&u.uz)) {
         if (newdungeon && In_hell(&u.uz0))
             pline_The("heat and smoke are gone.");
-    } else if (Is_knox(&u.uz)) {
+    } else if (uz_is_knox()) {
         /* alarm stops working once Croesus has died */
         if (new || !mvitals[PM_CROESUS].died) {
             You("have penetrated a high security area!");

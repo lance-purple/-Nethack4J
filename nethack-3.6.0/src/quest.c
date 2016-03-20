@@ -79,7 +79,7 @@ onquest()
 {
     if (u.uevent.qcompleted || Not_firsttime)
         return;
-    if (!Is_special(&u.uz))
+    if (!uz_is_special())
         return;
 
     if (Is_qstart(&u.uz))

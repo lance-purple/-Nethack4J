@@ -2105,7 +2105,7 @@ boolean
 in_town(x, y)
 register int x, y;
 {
-    s_level *slev = Is_special(&u.uz);
+    s_level *slev = uz_is_special();
     register struct mkroom *sroom;
     boolean has_subrooms = FALSE;
 
