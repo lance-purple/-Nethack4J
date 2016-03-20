@@ -546,6 +546,7 @@ E s_level *NDECL(uz_is_special);
 E branch *FDECL(Is_branchlev, (d_level *));
 E branch *NDECL(uz_is_branchlev);
 E boolean FDECL(builds_up, (d_level *));
+E boolean NDECL(uz_builds_up);
 E xchar FDECL(ledger_no, (d_level *));
 E xchar NDECL(uz_ledger_no);
 E xchar NDECL(maxledgerno);
@@ -737,8 +738,8 @@ E int FDECL(create_bonesfile, (d_level *, char **, char *));
 E void NDECL(cancel_bonesfile);
 #endif
 E void FDECL(commit_bonesfile, (d_level *));
-E int FDECL(open_bonesfile, (d_level *, char **));
-E int FDECL(delete_bonesfile, (d_level *));
+E int FDECL(open_uz_bonesfile, (char **));
+E int NDECL(delete_uz_bonesfile);
 E void NDECL(compress_bonesfile);
 E void FDECL(set_savefile_name, (BOOLEAN_P));
 #ifdef INSURANCE

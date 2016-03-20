@@ -1211,7 +1211,7 @@ xchar x, y;
         return "pool of water";
     else if (ltyp == WATER || uz_is_waterlevel())
         ; /* fall through to default return value */
-    else if (Is_juiblex_level(&u.uz))
+    else if (uz_is_juiblex_level())
         return "swamp";
     else if (ltyp == MOAT && !uz_is_medusa_level())
         return "moat";

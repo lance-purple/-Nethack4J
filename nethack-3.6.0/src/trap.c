@@ -1124,7 +1124,7 @@ unsigned trflags;
         }
         /* wumpus reference */
         if (Role_if(PM_RANGER) && !trap->madeby_u && !trap->once
-            && In_quest(&u.uz) && Is_qlocate(&u.uz)) {
+            && In_quest(&u.uz) && uz_is_qlocate()) {
             pline("Fortunately it has a bottom after all...");
             trap->once = 1;
         } else if (u.umonnum == PM_PIT_VIPER || u.umonnum == PM_PIT_FIEND) {

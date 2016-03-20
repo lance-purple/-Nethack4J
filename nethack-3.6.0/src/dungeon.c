@@ -1193,6 +1193,17 @@ d_level *lev;
                       && dptr->entry_lev == dptr->num_dunlevs);
 }
 
+boolean uz_builds_up()
+{
+    dungeon *dptr = &dungeons[u.uz.dnum];
+    /*
+     * FIXME:  this misclassifies a single level branch reached via stairs
+     * from below.  Saving grace is that no such branches currently exist.
+     */
+    return (boolean) (dptr->num_dunlevs > 1
+                      && dptr->entry_lev == dptr->num_dunlevs);
+}
+
 /* goto the next level (or appropriate dungeon) */
 void
 next_level(at_stairs)

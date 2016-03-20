@@ -680,7 +680,7 @@ makelevel()
                    (u.uz.dlevel < loc_lev->dlevel.dlevel) ? "a" : "b");
             makemaz(fillname);
             return;
-        } else if (In_hell(&u.uz)
+        } else if (uz_in_hell()
                    || (rn2(5) && u.uz.dnum == medusa_level.dnum
                        && uz_depth() > depth(&medusa_level))) {
             makemaz("");
@@ -906,7 +906,7 @@ boolean skip_lvl_checks;
     /* determine if it is even allowed;
        almost all special levels are excluded */
     if (!skip_lvl_checks
-        && (In_hell(&u.uz) || uz_in_V_tower() || uz_is_rogue_level()
+        && (uz_in_hell() || uz_in_V_tower() || uz_is_rogue_level()
             || level.flags.arboreal
             || ((sp = uz_is_special()) != 0 && !uz_is_oracle_level()
                 && (!uz_in_mines() || sp->flags.town))))

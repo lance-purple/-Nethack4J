@@ -816,14 +816,13 @@ d_level *lev;
 }
 
 int
-open_bonesfile(lev, bonesid)
-d_level *lev;
+open_uz_bonesfile(bonesid)
 char **bonesid;
 {
     const char *fq_bones;
     int fd;
 
-    *bonesid = set_bonesfile_name(bones, lev);
+    *bonesid = set_bonesfile_name(bones, &u.uz);
     fq_bones = fqname(bones, BONESPREFIX, 0);
     nh_uncompress(fq_bones); /* no effect if nonexistent */
 #ifdef MAC
@@ -835,10 +834,9 @@ char **bonesid;
 }
 
 int
-delete_bonesfile(lev)
-d_level *lev;
+delete_uz_bonesfile()
 {
-    (void) set_bonesfile_name(bones, lev);
+    (void) set_bonesfile_name(bones, &u.uz);
     return !(unlink(fqname(bones, BONESPREFIX, 0)) < 0);
 }
 

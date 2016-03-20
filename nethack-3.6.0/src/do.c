@@ -1227,7 +1227,7 @@ boolean at_stairs, falling, portal;
     assign_level(&u.uz, newlevel);
     assign_level(&u.utolev, newlevel);
     u.utotype = 0;
-    if (!builds_up(&u.uz)) { /* usual case */
+    if (!uz_builds_up()) { /* usual case */
         if (uz_dunlev() > uz_dunlev_reached())
             uz_dunlev_reached() = uz_dunlev();
     } else {

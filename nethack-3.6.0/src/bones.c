@@ -10,30 +10,29 @@ extern char bones[]; /* from files.c */
 extern long bytes_counted;
 #endif
 
-STATIC_DCL boolean FDECL(no_bones_level, (d_level *));
+STATIC_DCL boolean NDECL(uz_no_bones_level);
 STATIC_DCL void FDECL(goodfruit, (int));
 STATIC_DCL void FDECL(resetobjs, (struct obj *, BOOLEAN_P));
 STATIC_DCL boolean FDECL(fixuporacle, (struct monst *));
 
 STATIC_OVL boolean
-no_bones_level(lev)
-d_level *lev;
+uz_no_bones_level()
 {
     extern d_level save_dlevel; /* in do.c */
     s_level *sptr;
 
     if (ledger_no(&save_dlevel))
-        assign_level(lev, &save_dlevel);
+        assign_level(&u.uz, &save_dlevel);
 
-    return (boolean) (((sptr = Is_special(lev)) != 0 && !sptr->boneid)
-                      || !dungeons[lev->dnum].boneid
+    return (boolean) (((sptr = uz_is_special()) != 0 && !sptr->boneid)
+                      || !dungeons[u.uz.dnum].boneid
                       /* no bones on the last or multiway branch levels
                          in any dungeon (level 1 isn't multiway) */
-                      || Is_botlevel(lev)
-                      || (Is_branchlev(lev) && lev->dlevel > 1)
+                      || uz_is_botlevel()
+                      || (uz_is_branchlev() && u.uz.dlevel > 1)
                       /* no bones in the invocation level */
-                      || (In_hell(lev)
-                          && lev->dlevel == dunlevs_in_dungeon(lev) - 1));
+                      || (uz_in_hell()
+                          && u.uz.dlevel == dunlevs_in_uz_dungeon() - 1));
 }
 
 /* Call this function for each fruit object saved in the bones level: it marks
@@ -300,7 +299,7 @@ can_make_bones()
         return FALSE;
     if (uz_ledger_no() <= 0 || uz_ledger_no() > maxledgerno())
         return FALSE;
-    if (no_bones_level(&u.uz))
+    if (uz_no_bones_level())
         return FALSE; /* no bones for specific levels */
     if (u.uswallow) {
         return FALSE; /* no bones when swallowed */
@@ -342,12 +341,12 @@ struct obj *corpse;
     /* caller has already checked `can_make_bones()' */
 
     clear_bypasses();
-    fd = open_bonesfile(&u.uz, &bonesid);
+    fd = open_uz_bonesfile(&bonesid);
     if (fd >= 0) {
         (void) nhclose(fd);
         if (wizard) {
             if (yn("Bones file already exists.  Replace it?") == 'y') {
-                if (delete_bonesfile(&u.uz))
+                if (delete_uz_bonesfile())
                     goto make_bones;
                 else
                     pline("Cannot unlink old bones.");
@@ -561,9 +560,9 @@ getbones()
     if (rn2(3) /* only once in three times do we find bones */
         && !wizard)
         return 0;
-    if (no_bones_level(&u.uz))
+    if (uz_no_bones_level())
         return 0;
-    fd = open_bonesfile(&u.uz, &bonesid);
+    fd = open_uz_bonesfile(&bonesid);
     if (fd < 0)
         return 0;
 
@@ -631,7 +630,7 @@ getbones()
             return ok;
         }
     }
-    if (!delete_bonesfile(&u.uz)) {
+    if (!delete_uz_bonesfile()) {
         /* When N games try to simultaneously restore the same
          * bones file, N-1 of them will fail to delete it
          * (the first N-1 under AmigaDOS, the last N-1 under UNIX).
