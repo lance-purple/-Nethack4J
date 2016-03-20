@@ -431,7 +431,7 @@ fixup_special()
     }
 
     /* Still need to add some stuff to level file */
-    if (Is_medusa_level(&u.uz)) {
+    if (uz_is_medusa_level()) {
         struct obj *otmp;
         int tryct;
 
@@ -593,7 +593,7 @@ register const char *s;
 
     mazexy(&mm);
     mkstairs(mm.x, mm.y, 1, (struct mkroom *) 0); /* up */
-    if (!Invocation_lev(&u.uz)) {
+    if (!uz_invocation_lev()) {
         mazexy(&mm);
         mkstairs(mm.x, mm.y, 0, (struct mkroom *) 0); /* down */
     } else { /* choose "vibrating square" location */
@@ -1213,7 +1213,7 @@ xchar x, y;
         ; /* fall through to default return value */
     else if (Is_juiblex_level(&u.uz))
         return "swamp";
-    else if (ltyp == MOAT && !Is_medusa_level(&u.uz))
+    else if (ltyp == MOAT && !uz_is_medusa_level())
         return "moat";
 
     return "water";

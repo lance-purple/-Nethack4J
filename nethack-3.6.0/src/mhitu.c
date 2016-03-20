@@ -1202,7 +1202,7 @@ register struct attack *mattk;
                 if (is_pool(mtmp->mx, mtmp->my) && !Swimming && !Amphibious) {
                     boolean moat = (levl[mtmp->mx][mtmp->my].typ != POOL)
                                    && (levl[mtmp->mx][mtmp->my].typ != WATER)
-                                   && !Is_medusa_level(&u.uz)
+                                   && !uz_is_medusa_level()
                                    && !uz_is_waterlevel();
 
                     pline("%s drowns you...", Monnam(mtmp));

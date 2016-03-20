@@ -1897,7 +1897,7 @@ struct mkroom *croom;
      * are not stone-resistant and have monster inventory.  They also lack
      * other contents, but that can be specified as an empty container.
      */
-    if (o->id == STATUE && Is_medusa_level(&u.uz) && o->corpsenm == NON_PM) {
+    if (o->id == STATUE && uz_is_medusa_level() && o->corpsenm == NON_PM) {
         struct monst *was;
         struct obj *obj;
         int wastyp;

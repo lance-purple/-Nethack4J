@@ -962,9 +962,9 @@ wiz_map_levltyp(VOID_ARGS)
             Strcat(dsc, " sokoban-rules");
         /* non-flag info; probably should include dungeon branching
            checks (extra stairs and magic portals) here */
-        if (Invocation_lev(&u.uz))
+        if (uz_invocation_lev())
             Strcat(dsc, " invoke");
-        if (On_W_tower_level(&u.uz))
+        if (uz_on_W_tower_level())
             Strcat(dsc, " tower");
         /* append a branch identifier for completeness' sake */
         if (u.uz.dnum == 0)

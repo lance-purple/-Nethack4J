@@ -1262,7 +1262,7 @@ int upflag;
      * place_lregion(xTELE) -> put_lregion_here(xTELE) -> u_on_newpos()
      * Unspecified region (.lx == 0) defaults to entire level.
      */
-    if (was_in_W_tower && On_W_tower_level(&u.uz))
+    if (was_in_W_tower && uz_on_W_tower_level())
         /* Stay inside the Wizard's tower when feasible.
            We use the W Tower's exclusion region for the
            destination instead of its enclosing region.
@@ -1339,7 +1339,7 @@ uz_can_dig_down()
 {
     return (boolean) (!level.flags.hardfloor
                       && !uz_is_botlevel()
-                      && !Invocation_lev(&u.uz));
+                      && !uz_invocation_lev());
 }
 
 /*
@@ -1504,10 +1504,9 @@ const char *s;
 
 /* is `lev' part of Vlad's tower? */
 boolean
-In_V_tower(lev)
-d_level *lev;
+uz_in_V_tower()
 {
-    return (boolean) (lev->dnum == tower_dnum);
+    return (boolean) (u.uz.dnum == tower_dnum);
 }
 
 /* is `lev' a level containing the Wizard's tower? */
@@ -1518,6 +1517,13 @@ d_level *lev;
     return (boolean) (Is_wiz1_level(lev)
                       || Is_wiz2_level(lev)
                       || Is_wiz3_level(lev));
+}
+
+boolean uz_on_W_tower_level()
+{
+    return (boolean) (Is_wiz1_level(&u.uz)
+                      || Is_wiz2_level(&u.uz)
+                      || Is_wiz3_level(&u.uz));
 }
 
 /* is <x,y> of `lev' inside the Wizard's tower? */
@@ -1618,11 +1624,10 @@ int pct;
 }
 
 boolean
-Invocation_lev(lev)
-d_level *lev;
+uz_invocation_lev()
 {
-    return (boolean) (In_hell(lev)
-                      && lev->dlevel == dungeons[lev->dnum].num_dunlevs - 1);
+    return (boolean) (In_hell(&u.uz)
+                      && u.uz.dlevel == dungeons[u.uz.dnum].num_dunlevs - 1);
 }
 
 /* use instead of depth() wherever a degree of difficulty is made
@@ -1690,7 +1695,7 @@ const char *nam;
     /* hell is the old name, and wouldn't match; gehennom would match its
        branch, yielding the castle level instead of the valley of the dead */
     if (!strcmpi(nam, "gehennom") || !strcmpi(nam, "hell")) {
-        if (In_V_tower(&u.uz))
+        if (uz_in_V_tower())
             nam = " to Vlad's tower"; /* branch to... */
         else
             nam = "valley";
@@ -1961,7 +1966,7 @@ xchar *rdgn;
     }
 
     /* I hate searching for the invocation pos while debugging. -dean */
-    if (Invocation_lev(&u.uz)) {
+    if (uz_invocation_lev()) {
         putstr(win, 0, "");
         Sprintf(buf, "Invocation position @ (%d,%d), hero @ (%d,%d)",
                 inv_pos.x, inv_pos.y, u.ux, u.uy);

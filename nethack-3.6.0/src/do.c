@@ -1463,7 +1463,7 @@ boolean at_stairs, falling, portal;
             resurrect(); /* force confrontation with Wizard */
     } else if (In_quest(&u.uz)) {
         onquest(); /* might be reaching locate|goal level */
-    } else if (In_V_tower(&u.uz)) {
+    } else if (uz_in_V_tower()) {
         if (newdungeon && In_hell(&u.uz0))
             pline_The("heat and smoke are gone.");
     } else if (uz_is_knox()) {

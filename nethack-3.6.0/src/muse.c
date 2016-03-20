@@ -511,7 +511,7 @@ struct monst *mtmp;
             && !(uz_is_botlevel() || uz_in_endgame())
             && !(is_ice(x, y) || is_pool(x, y) || is_lava(x, y))
             && !(mtmp->data == &mons[PM_VLAD_THE_IMPALER]
-                 && In_V_tower(&u.uz))) {
+                 && uz_in_V_tower())) {
             m.defensive = obj;
             m.has_defense = MUSE_WAN_DIGGING;
         }
@@ -659,7 +659,7 @@ struct monst *mtmp;
                 mtmp->mtrapseen |= (1 << (TELEP_TRAP - 1));
             return 2;
         }
-        if ((mon_has_amulet(mtmp) || On_W_tower_level(&u.uz)) && !rn2(3)) {
+        if ((mon_has_amulet(mtmp) || uz_on_W_tower_level()) && !rn2(3)) {
             if (vismon)
                 pline("%s seems disoriented for a moment.", Monnam(mtmp));
             return 2;

@@ -906,7 +906,7 @@ boolean skip_lvl_checks;
     /* determine if it is even allowed;
        almost all special levels are excluded */
     if (!skip_lvl_checks
-        && (In_hell(&u.uz) || In_V_tower(&u.uz) || uz_is_rogue_level()
+        && (In_hell(&u.uz) || uz_in_V_tower() || uz_is_rogue_level()
             || level.flags.arboreal
             || ((sp = uz_is_special()) != 0 && !Is_oracle_level(&u.uz)
                 && (!uz_in_mines() || sp->flags.town))))

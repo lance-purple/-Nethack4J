@@ -100,7 +100,7 @@ typedef struct branch {
 #define uz_is_waterlevel() (uz_on_level(&water_level))
 #define uz_is_firelevel() (uz_on_level(&fire_level))
 #define uz_is_airlevel() (uz_on_level(&air_level))
-#define Is_medusa_level(x) (on_level(x, &medusa_level))
+#define uz_is_medusa_level() (uz_on_level(&medusa_level))
 #define Is_oracle_level(x) (on_level(x, &oracle_level))
 #define Is_valley(x) (on_level(x, &valley_level))
 #define Is_juiblex_level(x) (on_level(x, &juiblex_level))
