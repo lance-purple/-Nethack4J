@@ -1542,7 +1542,7 @@ boolean
 uz_in_W_tower(x, y)
 int x, y;
 {
-    if (!On_W_tower_level(&u.uz))
+    if (!uz_on_W_tower_level())
         return FALSE;
     /*
      * Both of the exclusion regions for arriving via level teleport
@@ -1608,12 +1608,12 @@ d_level *dest;
 
 /* dest = src + rn1(range) */
 void
-assign_rnd_level(dest, src, range)
-d_level *dest, *src;
+assign_rnd_level_from_uz(dest, range)
+d_level *dest;
 int range;
 {
-    dest->dnum = src->dnum;
-    dest->dlevel = src->dlevel + ((range > 0) ? rnd(range) : -rnd(-range));
+    dest->dnum = u.uz.dnum;
+    dest->dlevel = u.uz.dlevel + ((range > 0) ? rnd(range) : -rnd(-range));
 
     if (dest->dlevel > dunlevs_in_dungeon(dest))
         dest->dlevel = dunlevs_in_dungeon(dest);

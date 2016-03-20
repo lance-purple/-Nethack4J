@@ -173,7 +173,7 @@ extern int n_dgns; /* from dungeon.c */
 #ifdef SELECTSAVED
 STATIC_PTR int FDECL(CFDECLSPEC strcmp_wrap, (const void *, const void *));
 #endif
-STATIC_DCL char *FDECL(set_bonesfile_name, (char *, d_level *));
+STATIC_DCL char *FDECL(set_uz_bonesfile_name, (char *));
 STATIC_DCL char *NDECL(set_bonestemp_name);
 #ifdef COMPRESS
 STATIC_DCL void FDECL(redirect, (const char *, const char *, FILE *,
@@ -688,20 +688,19 @@ int fd;
  * bonesid to be read/written in the bones file.
  */
 STATIC_OVL char *
-set_bonesfile_name(file, lev)
+set_uz_bonesfile_name(file)
 char *file;
-d_level *lev;
 {
     s_level *sptr;
     char *dptr;
 
-    Sprintf(file, "bon%c%s", dungeons[lev->dnum].boneid,
-            In_quest(lev) ? urole.filecode : "0");
+    Sprintf(file, "bon%c%s", dungeons[u.uz.dnum].boneid,
+            uz_in_quest() ? urole.filecode : "0");
     dptr = eos(file);
-    if ((sptr = Is_special(lev)) != 0)
+    if ((sptr = uz_is_special()) != 0)
         Sprintf(dptr, ".%c", sptr->boneid);
     else
-        Sprintf(dptr, ".%d", lev->dlevel);
+        Sprintf(dptr, ".%d", u.uz.dlevel);
 #ifdef VMS
     Strcat(dptr, ";1");
 #endif
@@ -730,8 +729,7 @@ set_bonestemp_name()
 }
 
 int
-create_bonesfile(lev, bonesid, errbuf)
-d_level *lev;
+create_uz_bonesfile(bonesid, errbuf)
 char **bonesid;
 char errbuf[];
 {
@@ -740,7 +738,7 @@ char errbuf[];
 
     if (errbuf)
         *errbuf = '\0';
-    *bonesid = set_bonesfile_name(bones, lev);
+    *bonesid = set_uz_bonesfile_name(bones);
     file = set_bonestemp_name();
     file = fqname(file, BONESPREFIX, 0);
 
@@ -790,13 +788,12 @@ cancel_bonesfile()
 
 /* move completed bones file to proper name */
 void
-commit_bonesfile(lev)
-d_level *lev;
+commit_uz_bonesfile()
 {
     const char *fq_bones, *tempname;
     int ret;
 
-    (void) set_bonesfile_name(bones, lev);
+    (void) set_uz_bonesfile_name(bones);
     fq_bones = fqname(bones, BONESPREFIX, 0);
     tempname = set_bonestemp_name();
     tempname = fqname(tempname, BONESPREFIX, 1);
@@ -822,7 +819,7 @@ char **bonesid;
     const char *fq_bones;
     int fd;
 
-    *bonesid = set_bonesfile_name(bones, &u.uz);
+    *bonesid = set_uz_bonesfile_name(bones);
     fq_bones = fqname(bones, BONESPREFIX, 0);
     nh_uncompress(fq_bones); /* no effect if nonexistent */
 #ifdef MAC
@@ -836,7 +833,7 @@ char **bonesid;
 int
 delete_uz_bonesfile()
 {
-    (void) set_bonesfile_name(bones, &u.uz);
+    (void) set_uz_bonesfile_name(bones);
     return !(unlink(fqname(bones, BONESPREFIX, 0)) < 0);
 }
 

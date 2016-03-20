@@ -591,7 +591,7 @@ E void FDECL(find_hell, (d_level *));
 E void FDECL(goto_hell, (BOOLEAN_P, BOOLEAN_P));
 E void FDECL(assign_level, (d_level *, d_level *));
 E void FDECL(assign_level_from_uz, (d_level *));
-E void FDECL(assign_rnd_level, (d_level *, d_level *, int));
+E void FDECL(assign_rnd_level_from_uz, (d_level *, int));
 E int FDECL(induced_align, (int));
 E boolean NDECL(uz_invocation_lev);
 E xchar NDECL(level_difficulty);
@@ -733,11 +733,11 @@ E int FDECL(create_levelfile, (int, char *));
 E int FDECL(open_levelfile, (int, char *));
 E void FDECL(delete_levelfile, (int));
 E void NDECL(clearlocks);
-E int FDECL(create_bonesfile, (d_level *, char **, char *));
+E int FDECL(create_uz_bonesfile, (char **, char *));
 #ifdef MFLOPPY
 E void NDECL(cancel_bonesfile);
 #endif
-E void FDECL(commit_bonesfile, (d_level *));
+E void NDECL(commit_uz_bonesfile);
 E int FDECL(open_uz_bonesfile, (char **));
 E int NDECL(delete_uz_bonesfile);
 E void NDECL(compress_bonesfile);

@@ -490,7 +490,7 @@ make_bones:
     if (wizard)
         level.flags.wizard_bones = 1;
 
-    fd = create_bonesfile(&u.uz, &bonesid, whynot);
+    fd = create_uz_bonesfile(&bonesid, whynot);
     if (fd < 0) {
         if (wizard)
             pline1(whynot);
@@ -540,7 +540,7 @@ make_bones:
     update_mlstmv(); /* update monsters for eventual restoration */
     savelev(fd, uz_ledger_no(), WRITE_SAVE | FREE_SAVE);
     bclose(fd);
-    commit_bonesfile(&u.uz);
+    commit_uz_bonesfile();
     compress_bonesfile();
 }
 
