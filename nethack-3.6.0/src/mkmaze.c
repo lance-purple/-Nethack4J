@@ -261,7 +261,7 @@ d_level *lev;
          * the branch location (to avoid putting branches in corridors).
          */
         if (rtype == LR_BRANCH && nroom) {
-            place_branch(Is_branchlev(&u.uz), 0, 0);
+            place_branch(uz_is_branchlev(), 0, 0);
             return;
         }
 
@@ -338,7 +338,7 @@ d_level *lev;
         mkstairs(x, y, (char) rtype, (struct mkroom *) 0);
         break;
     case LR_BRANCH:
-        place_branch(Is_branchlev(&u.uz), x, y);
+        place_branch(uz_is_branchlev(), x, y);
         break;
     }
     return TRUE;
@@ -426,7 +426,7 @@ fixup_special()
     }
 
     /* place dungeon branch if not placed above */
-    if (!added_branch && Is_branchlev(&u.uz)) {
+    if (!added_branch && uz_is_branchlev()) {
         place_lregion(0, 0, 0, 0, 0, 0, 0, 0, LR_BRANCH, (d_level *) 0);
     }
 
@@ -641,7 +641,7 @@ register const char *s;
     }
 
     /* place branch stair or portal */
-    place_branch(Is_branchlev(&u.uz), 0, 0);
+    place_branch(uz_is_branchlev(), 0, 0);
 
     for (x = rn1(8, 11); x; x--) {
         mazexy(&mm);

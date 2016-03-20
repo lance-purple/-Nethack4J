@@ -699,7 +699,7 @@ register struct monst *mtmp;
         }
         break;
     case S_GNOME:
-        if (!rn2((In_mines(&u.uz) && in_mklev) ? 20 : 60)) {
+        if (!rn2((uz_in_mines() && in_mklev) ? 20 : 60)) {
             otmp = mksobj(rn2(4) ? TALLOW_CANDLE : WAX_CANDLE, TRUE, FALSE);
             otmp->quan = 1;
             otmp->owt = weight(otmp);
@@ -1095,7 +1095,7 @@ int mmflags;
         } while (++tryct <= 50
                  /* in Sokoban, don't accept a giant on first try;
                     after that, boulder carriers are fair game */
-                 && ((tryct == 1 && throws_rocks(ptr) && In_sokoban(&u.uz))
+                 && ((tryct == 1 && throws_rocks(ptr) && uz_in_sokoban())
                      || !goodpos(x, y, &fakemon, gpflags)));
         mndx = monsndx(ptr);
     }
@@ -1141,7 +1141,7 @@ int mmflags;
     else
         mtmp->female = rn2(2); /* ignored for neuters */
 
-    if (In_sokoban(&u.uz) && !mindless(ptr)) /* know about traps here */
+    if (uz_in_sokoban() && !mindless(ptr)) /* know about traps here */
         mtmp->mtrapseen = (1L << (PIT - 1)) | (1L << (HOLE - 1));
     /* quest leader and nemesis both know about all trap types */
     if (ptr->msound == MS_LEADER || ptr->msound == MS_NEMESIS)
@@ -2026,7 +2026,7 @@ register struct monst *mtmp;
             appear = uz_is_rogue_level() ? S_vwall : S_vcdoor;
         if (!mtmp->minvis || See_invisible)
             block_point(mx, my); /* vision */
-    } else if (level.flags.is_maze_lev && !In_sokoban(&u.uz) && rn2(2)) {
+    } else if (level.flags.is_maze_lev && !uz_in_sokoban() && rn2(2)) {
         ap_type = M_AP_OBJECT;
         appear = STATUE;
     } else if (roomno < 0 && !t_at(mx, my)) {

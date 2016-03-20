@@ -1167,6 +1167,17 @@ d_level *lev;
     return (branch *) 0;
 }
 
+branch* uz_is_branchlev() 
+{
+    branch *curr;
+
+    for (curr = branches; curr; curr = curr->next) {
+        if (uz_on_level(&curr->end1) || uz_on_level(&curr->end2))
+            return curr;
+    }
+    return (branch *) 0;
+}
+
 /* returns True iff the branch 'lev' is in a branch which builds up */
 boolean
 builds_up(lev)
@@ -1318,11 +1329,16 @@ d_level *lev;
     return (boolean) (lev->dlevel == dungeons[lev->dnum].num_dunlevs);
 }
 
+boolean uz_is_botlevel()
+{
+    return (boolean) (u.uz.dlevel == dungeons[u.uz.dnum].num_dunlevs);
+}
+
 boolean
 uz_can_dig_down()
 {
     return (boolean) (!level.flags.hardfloor
-                      && !Is_botlevel(&u.uz)
+                      && !uz_is_botlevel()
                       && !Invocation_lev(&u.uz));
 }
 
@@ -1435,10 +1451,9 @@ d_level *lev;
 
 /* are you in the mines dungeon? */
 boolean
-In_mines(lev)
-d_level *lev;
+uz_in_mines()
 {
-    return (boolean) (lev->dnum == mines_dnum);
+    return (boolean) (u.uz.dnum == mines_dnum);
 }
 
 /*
@@ -2255,7 +2270,7 @@ mapseen *mptr;
        climb out on the far side on the first Sokoban level; also, wizard
        mode overrides teleport restrictions) */
     if (In_sokoban(&mptr->lev)
-        && (In_sokoban(&u.uz) || !mptr->flags.sokosolved))
+        && (uz_in_sokoban() || !mptr->flags.sokosolved))
         return TRUE;
     /* when in the endgame, list all endgame levels visited, whether they
        have annotations or not, so that #overview doesn't become extremely
@@ -2311,7 +2326,7 @@ recalc_mapseen()
         }
     }
     mptr->flags.knownbones = 0;
-    mptr->flags.sokosolved = In_sokoban(&u.uz) && !Sokoban;
+    mptr->flags.sokosolved = uz_in_sokoban() && !Sokoban;
     /* mptr->flags.bigroom retains previous value when hero can't see */
     if (!Blind)
         mptr->flags.bigroom = Is_bigroom(&u.uz);

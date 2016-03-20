@@ -594,7 +594,7 @@ level_tele()
     char buf[BUFSZ];
     boolean force_dest = FALSE;
 
-    if ((u.uhave.amulet || uz_in_endgame() || In_sokoban(&u.uz))
+    if ((u.uhave.amulet || uz_in_endgame() || uz_in_sokoban())
         && !wizard) {
         You_feel("very disoriented for a moment.");
         return;
@@ -1138,7 +1138,7 @@ int in_sight;
         if ((tt == HOLE || tt == TRAPDOOR)) {
             if (uz_is_stronghold()) {
                 assign_level(&tolevel, &valley_level);
-            } else if (Is_botlevel(&u.uz)) {
+            } else if (uz_is_botlevel()) {
                 if (in_sight && trap->tseen)
                     pline("%s avoids the %s.", Monnam(mtmp),
                           (tt == HOLE) ? "hole" : "trap");
@@ -1281,7 +1281,7 @@ random_teleport_level()
 
         /* if hero hasn't reached the middle locate level yet,
            no one can randomly teleport past it */
-        if (dunlev_reached(&u.uz) < qlocate_depth)
+        if (uz_dunlev_reached() < qlocate_depth)
             bottom = qlocate_depth;
         min_depth = dungeons[u.uz.dnum].depth_start;
         max_depth = bottom + (dungeons[u.uz.dnum].depth_start - 1);
@@ -1303,7 +1303,7 @@ random_teleport_level()
     if (nlev > max_depth) {
         nlev = max_depth;
         /* teleport up if already on bottom */
-        if (Is_botlevel(&u.uz))
+        if (uz_is_botlevel())
             nlev -= rnd(3);
     }
     if (nlev < min_depth) {

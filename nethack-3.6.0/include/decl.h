@@ -123,7 +123,7 @@ E NEARDATA dest_area updest, dndest; /* level-change destination areas */
 E NEARDATA coord inv_pos;
 E NEARDATA dungeon dungeons[];
 E NEARDATA s_level *sp_levchn;
-#define dunlev_reached(x) (dungeons[(x)->dnum].dunlev_ureached)
+#define uz_dunlev_reached(x) (dungeons[u.uz.dnum].dunlev_ureached)
 
 #include "quest.h"
 E struct q_score quest_status;

@@ -305,7 +305,7 @@ can_make_bones()
     if (u.uswallow) {
         return FALSE; /* no bones when swallowed */
     }
-    if (!Is_branchlev(&u.uz)) {
+    if (!uz_is_branchlev()) {
         /* no bones on non-branches with portals */
         for (ttmp = ftrap; ttmp; ttmp = ttmp->ntrap)
             if (ttmp->ttyp == MAGIC_PORTAL)

@@ -1316,7 +1316,7 @@ schar loc;
             cc->x = valley_level.dnum;
             cc->y = valley_level.dlevel;
             break;
-        } else if (uz_in_endgame() || Is_botlevel(&u.uz)) {
+        } else if (uz_in_endgame() || uz_is_botlevel()) {
             cc->y = cc->x = 0;
             break;
         } /* else fall to the next cases */

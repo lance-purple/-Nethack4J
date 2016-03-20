@@ -1112,7 +1112,7 @@ boolean ghostly;
             levl[cc.x][cc.y].typ = STAIRS;
         }
 
-        br = Is_branchlev(&u.uz);
+        br = uz_is_branchlev();
         if (br && u.uz.dlevel == 1) {
             d_level ltmp;
 

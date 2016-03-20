@@ -495,13 +495,13 @@ const char *const *nlp;
     int name_wanted;
     s_level *sptr;
 
-    if (nlp == shkfoods && In_mines(&u.uz) && Role_if(PM_MONK)
+    if (nlp == shkfoods && uz_in_mines() && Role_if(PM_MONK)
         && (sptr = uz_is_special()) != 0 && sptr->flags.town) {
         /* special-case override for minetown food store for monks */
         nlp = shkhealthfoods;
     }
 
-    if (nlp == shklight && In_mines(&u.uz) && (sptr = uz_is_special()) != 0
+    if (nlp == shklight && uz_in_mines() && (sptr = uz_is_special()) != 0
         && sptr->flags.town) {
         /* special-case minetown lighting shk */
         shname = "+Izchak";

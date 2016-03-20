@@ -971,7 +971,7 @@ wiz_map_levltyp(VOID_ARGS)
             Strcat(dsc, " dungeon");
         else if (u.uz.dnum == mines_dnum)
             Strcat(dsc, " mines");
-        else if (In_sokoban(&u.uz))
+        else if (uz_in_sokoban())
             Strcat(dsc, " sokoban");
         else if (u.uz.dnum == quest_dnum)
             Strcat(dsc, " quest");
@@ -3095,7 +3095,7 @@ wiz_migrate_mons()
     if (*inbuf == '\033')
         return 0;
     mcount = atoi(inbuf);
-    if (mcount < 0 || mcount > (COLNO * ROWNO) || Is_botlevel(&u.uz))
+    if (mcount < 0 || mcount > (COLNO * ROWNO) || uz_is_botlevel())
         return 0;
     while (mcount > 0) {
         if (uz_is_stronghold())

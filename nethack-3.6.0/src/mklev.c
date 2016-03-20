@@ -665,7 +665,7 @@ makelevel()
         } else if (dungeons[u.uz.dnum].proto[0]) {
             makemaz("");
             return;
-        } else if (In_mines(&u.uz)) {
+        } else if (uz_in_mines()) {
             makemaz("minefill");
             return;
         } else if (In_quest(&u.uz)) {
@@ -699,7 +699,7 @@ makelevel()
 
     /* construct stairs (up and down in different rooms if possible) */
     croom = &rooms[rn2(nroom)];
-    if (!Is_botlevel(&u.uz))
+    if (!uz_is_botlevel())
         mkstairs(somex(croom), somey(croom), 0, croom); /* down */
     if (nroom > 1) {
         troom = croom;
@@ -717,7 +717,7 @@ makelevel()
         mkstairs(sx, sy, 1, croom); /* up */
     }
 
-    branchp = Is_branchlev(&u.uz);    /* possible dungeon branch */
+    branchp = uz_is_branchlev();    /* possible dungeon branch */
     room_threshold = branchp ? 4 : 3; /* minimum number of rooms needed
                                          to allow a random special room */
     if (uz_is_rogue_level())
@@ -909,7 +909,7 @@ boolean skip_lvl_checks;
         && (In_hell(&u.uz) || In_V_tower(&u.uz) || uz_is_rogue_level()
             || level.flags.arboreal
             || ((sp = uz_is_special()) != 0 && !Is_oracle_level(&u.uz)
-                && (!In_mines(&u.uz) || sp->flags.town))))
+                && (!uz_in_mines() || sp->flags.town))))
         return;
 
     /* basic level-related probabilities */
@@ -920,7 +920,7 @@ boolean skip_lvl_checks;
 
     /* mines have ***MORE*** goodies - otherwise why mine? */
     if (!skip_lvl_checks) {
-        if (In_mines(&u.uz)) {
+        if (uz_in_mines()) {
             goldprob *= 2;
             gemprob *= 3;
         } else if (In_quest(&u.uz)) {
@@ -1678,7 +1678,7 @@ xchar x, y;
         source = &br->end2;
     } else {
         /* disallow Knox branch on a level with one branch already */
-        if (Is_branchlev(&u.uz))
+        if (uz_is_branchlev())
             return;
         source = &br->end1;
     }

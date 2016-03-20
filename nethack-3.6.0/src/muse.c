@@ -508,7 +508,7 @@ struct monst *mtmp;
             && !Sokoban
             /* digging wouldn't be effective; assume they know that */
             && !(levl[x][y].wall_info & W_NONDIGGABLE)
-            && !(Is_botlevel(&u.uz) || uz_in_endgame())
+            && !(uz_is_botlevel() || uz_in_endgame())
             && !(is_ice(x, y) || is_pool(x, y) || is_lava(x, y))
             && !(mtmp->data == &mons[PM_VLAD_THE_IMPALER]
                  && In_V_tower(&u.uz))) {
@@ -813,7 +813,7 @@ struct monst *mtmp;
          * trap doors, not holes in the floor.  We check here for
          * safety.
          */
-        if (Is_botlevel(&u.uz))
+        if (uz_is_botlevel())
             return 0;
         m_flee(mtmp);
         if (vis) {

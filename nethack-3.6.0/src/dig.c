@@ -699,7 +699,7 @@ int ttyp;
 
                     if (uz_is_stronghold()) {
                         assign_level(&tolevel, &valley_level);
-                    } else if (Is_botlevel(&u.uz)) {
+                    } else if (uz_is_botlevel()) {
                         if (canseemon(mtmp))
                             pline("%s avoids the trap.", Monnam(mtmp));
                         return;

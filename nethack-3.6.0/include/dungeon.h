@@ -124,6 +124,7 @@ typedef struct branch {
 #define Is_sokoend_level(x) (on_level(x, &sokoend_level))
 
 #define In_sokoban(x) ((x)->dnum == sokoban_dnum)
+#define uz_in_sokoban() (u.uz.dnum == sokoban_dnum)
 #define In_endgame(x) ((x)->dnum == astral_level.dnum)
 #define uz_in_endgame() (u.uz.dnum == astral_level.dnum)
 
