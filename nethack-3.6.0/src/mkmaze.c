@@ -463,7 +463,7 @@ fixup_special()
                 set_corpsenm(otmp, rndmonnum());
             }
         }
-    } else if (Is_wiz1_level(&u.uz)) {
+    } else if (uz_is_wiz1_level()) {
         croom = search_special(MORGUE);
 
         create_secret_door(croom, W_SOUTH | W_EAST | W_WEST);

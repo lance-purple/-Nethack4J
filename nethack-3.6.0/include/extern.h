@@ -578,6 +578,7 @@ E boolean NDECL(uz_can_dig_down);
 E boolean FDECL(uz_can_rise_up, (int, int));
 E boolean NDECL(uz_has_ceiling);
 E boolean FDECL(In_quest, (d_level *));
+E boolean NDECL(uz_in_quest);
 E boolean NDECL(uz_in_mines);
 E branch *FDECL(dungeon_branch, (const char *));
 E boolean FDECL(at_dgn_entrance, (const char *));
@@ -597,16 +598,16 @@ E boolean NDECL(uz_invocation_lev);
 E xchar NDECL(level_difficulty);
 E schar FDECL(lev_by_name, (const char *));
 E schar FDECL(print_dungeon, (BOOLEAN_P, schar *, xchar *));
-E char *FDECL(get_annotation, (d_level *));
+E char *NDECL(uz_get_annotation);
 E int NDECL(donamelevel);
 E int NDECL(dooverview);
 E void FDECL(show_overview, (int, int));
 E void FDECL(forget_mapseen, (int));
-E void FDECL(init_mapseen, (d_level *));
+E void NDECL(uz_init_mapseen);
 E void NDECL(recalc_mapseen);
 E void FDECL(mapseen_temple, (struct monst *));
 E void FDECL(room_discovered, (int));
-E void FDECL(recbranch_mapseen, (d_level *, d_level *));
+E void FDECL(uz_recbranch_mapseen, (d_level *));
 E void FDECL(remdun_mapseen, (int));
 
 /* ### eat.c ### */

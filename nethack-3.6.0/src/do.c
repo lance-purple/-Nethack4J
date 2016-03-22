@@ -1222,7 +1222,7 @@ boolean at_stairs, falling, portal;
      * some non-standard means of transportation (level teleport).
      */
     if ((at_stairs || falling || portal) && (u.uz.dnum != newlevel->dnum))
-        recbranch_mapseen(&u.uz, newlevel);
+        uz_recbranch_mapseen(newlevel);
     assign_level_from_uz(&u.uz0);
     assign_level(&u.uz, newlevel);
     assign_level(&u.utolev, newlevel);
@@ -1498,7 +1498,7 @@ boolean at_stairs, falling, portal;
     save_currentstate();
 #endif
 
-    if ((annotation = get_annotation(&u.uz)))
+    if ((annotation = uz_get_annotation()))
         You("remember this level as %s.", annotation);
 
     /* assume this will always return TRUE when changing level */

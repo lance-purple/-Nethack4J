@@ -86,7 +86,7 @@ onquest()
         on_start();
     else if (uz_is_qlocate())
         on_locate();
-    else if (Is_nemesis(&u.uz))
+    else if (uz_is_nemesis())
         on_goal();
     return;
 }
